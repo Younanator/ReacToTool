@@ -1,14 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
+import {AdobeDisabled} from '../src/components/AdobeDisabled'
 import './App.css';
-import Axios from 'axios'
-import {urlHeader} from './config/config'
+import { PrinterRemoval } from './components/Printer';
 
 function App() {
-
   return (
     <div className="App">
-      <p onClick={() => Axios.get(`${urlHeader}/makers`)}>Add call</p>
+      <AdobeDisabled></AdobeDisabled>
+      <PrinterRemoval></PrinterRemoval>
     </div>
   );
 }
