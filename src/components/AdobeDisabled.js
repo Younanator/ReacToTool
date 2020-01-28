@@ -3,9 +3,6 @@ import uuid from 'react-uuid'
 import Axios from 'axios'
 import {urlHeader} from '../config/config'
 
-
-
-
 export const AdobeDisabled = () => {
     
     const [output, setOutput] = useState([])
@@ -31,9 +28,9 @@ export const AdobeDisabled = () => {
 
     return (
         <div style={{display:'flex',wordBreak:'break-word',flexDirection:'row'}}>
-        <div onClick={() => getDisabledUsers()}> Find all Missing Adobe users</div>
+        <p style={{}} onClick={() => getDisabledUsers()}>Find all Missing Adobe users</p>
        
-        {spinner ? <div>Loading...</div>:null}
+        {spinner ? <div>Loading...</div>: null}
        <div style={{display:'flex',flexDirection:'column'}}>
         {output.map(e => {
             return(
