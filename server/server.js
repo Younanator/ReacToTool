@@ -20,9 +20,11 @@ const ps = new Shell({
 
 const AdobeController = require('./Controllers/AdobeController')(app,ps)
 const PrinterController = require('./Controllers/PrinterController')(app,ps)
+const PowershellController = require('./Controllers/PowershellController')(app,ps)
 
 AdobeController.index();
 PrinterController.index();
+PowershellController.index();
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
