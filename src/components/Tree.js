@@ -6,8 +6,9 @@ export const TreeGraph = () => {
 
   
   const [tempNode,setTemp] = useState([{}])
+  const [search,setSearch] = useState('')
 
-  const  dfs = (tree, value) => {
+  const  dfs = (tree) => {
     var stack = []
     
     stack.push(tree[0])
@@ -18,7 +19,7 @@ export const TreeGraph = () => {
 
             console.log(node)
             
-            if (node.name === value) {
+            if (node.name === search) {
               
                 setTemp(node)
             }
@@ -38,13 +39,24 @@ useEffect(() => {
     return (
       
         
-        <div id="treeWrapper" style={{width: '80em', height: '80em'}}>
-        <div style={{display:'flex',flexDirection:'row'}}>
-        <Tree pathFunc="step" nodeSvgShape={svgSquare} data={ myTreeData} />
-        <Tree pathFunc="step" nodeSvgShape={svgSquare} data={ tempNode} />
+        <div id="treeWrapper" style={{width: '40em', height: '40em'}}>
+
+<div className="rowFlex">
+             <input onChange={(e) => setSearch(e.target.value)}></input>
+             <p onClick = {() => dfs(myTreeData) }> Find Node</p>
         </div>
         
-        <p onClick = {() => dfs(myTreeData,"Monkey") }> Find Node</p>
+        <div className="rowFlex">
+
+
+        <div style={{width:'800px',height:'400px'}}>
+       <Tree pathFunc="step" orientation="vertical" nodeSvgShape={svgSquare} data={ myTreeData} />
+       </div>
+       
+       <div style={{width:'800px',height:'400px'}}>
+        <Tree pathFunc="step" orientation="vertical" nodeSvgShape={svgSquare} data={ tempNode} />
+        </div>
+        </div>
         
       </div>
       
@@ -67,7 +79,7 @@ const svgSquare = {
   
 const myTreeData = [
   {
-    name: 'syd1dom01',
+    name: 'syd1inf01',
     attributes: {
       keyA: 'Lol',
       keyB: 'val B',
@@ -75,24 +87,26 @@ const myTreeData = [
     },
     children: [
       {
-        name: 'Monkey',
+        name: 'syd1dom01',
         attributes: {
           item: 'val A',
           keyB: 'val B',
           keyC: 'val C',
         },
+        children:[
+          {
+            name: 'David',
+        attributes: {
+          item: 'val A',
+          keyB: 'val B',
+          keyC: 'val C',
+        },
+          }
+        ]
       },
       {
-        name: 'Level 2: B',
+        name: 'One',
       },
     ],
   },
-  {
-    name: 'syd1dom02',
-    attributes: {
-      keyA: 'Lol',
-      keyB: 'val B',
-      keyC: 'val C',
-    }
-  }
 ];

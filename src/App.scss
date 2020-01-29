@@ -1,4 +1,5 @@
 
+
 .all {
   display: flex;
   perspective: 10px;
@@ -112,4 +113,9 @@
   &::first-letter {
     font-size: 12px;
   }
+}
+
+.rowFlex{
+  display:flex;
+  flex-direction:row;
 }
