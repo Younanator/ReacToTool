@@ -27,9 +27,10 @@ export const AdobeDisabled = () => {
     },[spinner])
 
     return (
-        <div style={{display:'flex',wordBreak:'break-word',flexDirection:'row'}}>
-        <p style={{}} onClick={() => getDisabledUsers()}>Find all Missing Adobe users</p>
-       
+        <div style={{display:'flex',flexDirection:'row'}}>
+            <p>For this function to work, you need to go to the Adobe Admin and export a list of users to your documents folder. To do so, just go to the users tab</p>
+        <button style={{}} onClick={() => getDisabledUsers()}>Find all Missing Adobe users</button>
+        
         {spinner ? <div>Loading...</div>: null}
        <div style={{display:'flex',flexDirection:'column'}}>
         {output.map(e => {
