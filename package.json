@@ -35,6 +35,7 @@
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
     "node-powershell": "^4.0.0",
+    "node-sass": "^4.13.1",
     "react": "^16.12.0",
     "react-beautiful-dnd": "^12.2.0",
     "react-d3-tree": "^1.16.1",
