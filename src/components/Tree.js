@@ -14,6 +14,29 @@ export const TreeGraph = () => {
 }
 
 
+function dfs(tree, value) {
+    var stack = []
+    
+    stack.push(tree[0])
+    
+    while (stack.length !== 0) {
+        for (let i = 0; i < stack.length; i++) {
+            var node = stack.pop()
+            
+            if (node.value === value) {
+                return node
+            }
+            if (node.right) {
+                stack.push(tree[node.right])
+            }
+            if (node.left) {
+                stack.push(tree[node.left])
+            }
+        }
+    }
+    return null
+}
+
 
 const svgSquare = {
     shape: 'rect',
