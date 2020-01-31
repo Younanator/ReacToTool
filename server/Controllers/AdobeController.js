@@ -13,7 +13,7 @@ module.exports = (app,ps) => {
 
                     res.status(200).send(users)
                  }).catch(error => {
-                    res.status(422).send(error)
+                    res.status(422).send('Error , check server')
                  });
 
             

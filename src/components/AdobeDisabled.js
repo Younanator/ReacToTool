@@ -17,8 +17,8 @@ export const AdobeDisabled = () => {
             setSpinner(false)
         } catch (error) {
             setSpinner(false)
-            console.log(error)
-            setErr(error)
+            
+            setErr('Error')
         }
     }
    
