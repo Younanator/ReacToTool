@@ -48,7 +48,7 @@
     "start": "rescripts start",
     "build": "rescripts build",
     "test": "rescripts test",
-    "edev": "concurrently \"BROWSER=none yarn start\" \"nodemon server/server.js\" \"wait-on http://localhost:3000 && electron .\" \"react-scripts start\" ",
+    "edev": "concurrently \"BROWSER=none yarn start\"  \"wait-on http://localhost:3000 && electron .\" \"react-scripts start\" ",
     "eject": "react-scripts eject",
     "postinstall": "electron-builder install-app-deps",
     "prepack": "yarn build",

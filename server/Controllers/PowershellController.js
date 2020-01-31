@@ -16,8 +16,7 @@ module.exports = (app,ps) => {
                  }).catch(error => {
                     res.status(422).send(error)
                  });
-
-            
+    
           });  
 }
 
@@ -27,29 +26,18 @@ const unlockUser = async () => {
 
         const {user} = req.query;
            
-        
               ps.addCommand(`
-              param([switch]$Elevated)
 
-function Test-Admin {
-  $currentUser = New-Object Security.Principal.WindowsPrincipal $([Security.Principal.WindowsIdentity]::GetCurrent())
-  $currentUser.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+$user = "Unlocked user ${user}"
+$err = "Account is not locked"
+
+if(Unlock-ADAccount -Identity ${user}){
+ $user
+}
+else{
+ $err
 }
 
-if ((Test-Admin) -eq $false)  {
-    if ($elevated) 
-    {
-        # tried to elevate, did not work, aborting
-    } 
-    else {
-        Start-Process powershell.exe -Verb RunAs -ArgumentList ('-noprofile -noexit -file "{0}" -elevated' -f ($myinvocation.MyCommand.Definition))
-}
-
-exit
-}
-
-'running with full privileges'
-              Unlock-ADAccount -Identity ${user}
 
               
               
@@ -57,11 +45,11 @@ exit
              
              ps.invoke().then(output => {
                  
-                ps.dispose()
-                res.status(200).send(`Unlocked User ${user}`)
+                
+                res.status(200).send(output)
              }).catch(error => {
-                 ps.dispose()
-                res.status(422).send('Cannot unlock user')
+                console.log('err')
+                res.status(422).send('Error')
              });      
       });  
 }
