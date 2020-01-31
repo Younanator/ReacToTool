@@ -12,7 +12,6 @@ app.use(cors({origin: 'http://localhost:3000',credentials:true,allowedHeaders:['
 
 
 const ps = new Shell({
-    verbose: true,
     executionPolicy: 'Bypass',
     noProfile: true,
   });
@@ -25,6 +24,7 @@ const PowershellController = require('./Controllers/PowershellController')(app,p
 AdobeController.index();
 PrinterController.index();
 PowershellController.index();
+PowershellController.unlockUser();
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));

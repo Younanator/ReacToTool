@@ -8,6 +8,7 @@ export const TreeGraph = () => {
   const [tempNode,setTemp] = useState([{}])
   const [search,setSearch] = useState('')
 
+  // Depth First search
   const  dfs = (tree) => {
     var stack = []
     
@@ -19,8 +20,7 @@ export const TreeGraph = () => {
 
             console.log(node)
             
-            if (node.name === search) {
-              
+            if (node.name === search) {            
                 setTemp(node)
             }
 
