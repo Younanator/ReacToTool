@@ -112,7 +112,7 @@ export const DropdownUsers = () => {
             }).map(e => {
                 return (
                     
-                        <div onClick={() => setUser(e.samAcc)}>
+                        <div key={uuid()} onClick={() => setUser(e.samAcc)}>
                             {e.name}
                             <hr></hr>
                         </div>

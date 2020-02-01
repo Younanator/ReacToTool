@@ -13,6 +13,7 @@ module.exports = (app,ps) => {
 
             console.log(docPath)
                  ps.addCommand(`
+                 
                  <#
 Author: Created by Chris Younan
 Date : 30/10/2019
@@ -32,7 +33,7 @@ for($i=0; $i -lt $users.length; $i++){
 
       for($k = 0; $k -lt $P.length; $k++){
 
-      if($users[$i].UserPrincipalName -eq $P[$k].email){
+            if($users[$i].SamAccountName.toLower()  -match  $P[$k].email.toLower() -or $users[$i].UserPrincipalName.toLower() -eq $P[$k].email.toLower()){
 
            $arrayFinal+=$P[$k]
       
@@ -48,7 +49,6 @@ $missing = $P | Where {$arrayFinal -NotContains $_}
 foreach($user in $missing){
 $user.email
 }
-
 
                  `);
                  
