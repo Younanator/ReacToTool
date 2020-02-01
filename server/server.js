@@ -25,6 +25,7 @@ AdobeController.index();
 PrinterController.index();
 PowershellController.index();
 PowershellController.unlockUser();
+PowershellController.getAllUsers();
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));

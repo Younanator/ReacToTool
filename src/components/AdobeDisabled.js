@@ -12,7 +12,11 @@ export const AdobeDisabled = () => {
     const getDisabledUsers = async () => {
         try {
             setSpinner(true)
-            const users = await Axios.get(`${urlHeader}/Adobe`)
+            const users = await Axios.get(`${urlHeader}/Adobe`,{
+                params: {
+                  user: localStorage.getItem('username')
+                }            
+            })
             setOutput(users.data)
             setSpinner(false)
         } catch (error) {
