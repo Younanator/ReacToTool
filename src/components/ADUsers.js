@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid'
 import Axios from 'axios'
 import {urlHeader} from '../config/config'
+import { toast } from 'react-toastify';
 
 export const ADUser = () => {
     
@@ -67,6 +68,7 @@ export const DropdownUsers = () => {
                 }            
             })
             
+            toast(users.data,{type:'success'})
             setUnlockSucc(users.data)
             setUnlockSpinner(false)
         } catch (error) {       
@@ -80,6 +82,7 @@ export const DropdownUsers = () => {
             setUsersSpinner(true)
             const users = await Axios.get(`${urlHeader}/AllUsers`)
             console.log(users.data)
+            
             setUsers(users.data)
             setUsersSpinner(false)
         } catch (error) {
@@ -97,7 +100,8 @@ export const DropdownUsers = () => {
     return(
         <div>
             <div className="rowFlex">
-            <input value={user} onChange={(e) => setUser(e.target.value)}></input>
+            <input value={user} onChange={(e) => setUser(e.target.value)} type="text" class="form-control" placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+            
             <button onClick={() => UnlockUser()}>Unlock Account</button>
             {unlockSucc}
             {unlockSpinner ? <p>...Unlocking</p> : null}

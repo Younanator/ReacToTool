@@ -8,6 +8,9 @@ import { BrowserRouter, Link,withRouter } from 'react-router-dom';
 import { TreeGraph } from './components/Tree';
 import Navbar from './components/Navbar';
 import { Username } from './components/User';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 function App() {
@@ -22,6 +25,7 @@ function App() {
       <div style={{marginTop:'30px'}}>
       <Routes></Routes>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
     </BrowserRouter>
   );

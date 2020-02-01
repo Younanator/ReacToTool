@@ -7,4 +7,4 @@ cd winctool
 cd dist
 cd win-unpacked
 start MyApp.exe -multiwindow
-start node server/server.js
+start /MIN node server/server.js 
