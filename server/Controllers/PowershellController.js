@@ -5,8 +5,8 @@ module.exports = (app,ps) => {
     const index = async () => {
         app.get("/api/GetUsers",  function(req, res) {
                  ps.addCommand(`
-                 $users = Get-ADUser -Properties “LastLogonDate” -Filter * -SearchBase "OU=Class 1 Standard Users,OU=User Accounts,DC=CE,DC=CORP"
-                 $edexusers = Get-ADUser -Properties “LastLogonDate” -Filter * -SearchBase "OU=Class 6 Edex Users,OU=User Accounts,DC=CE,DC=CORP"
+                 $users = Get-ADUser  -Filter * -SearchBase "OU=Class 1 Standard Users,OU=User Accounts,DC=CE,DC=CORP"
+                 $edexusers = Get-ADUser  -Filter * -SearchBase "OU=Class 6 Edex Users,OU=User Accounts,DC=CE,DC=CORP"
                  $users+=$edexusers
                  
                  
