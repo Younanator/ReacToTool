@@ -35,18 +35,19 @@ const unlockUser = async () => {
            
               ps.addCommand(`
 
-$user = "Unlocked user ${user}"
-$err = "Account is not locked"
+              $user = Get-ADUser -property 'LockedOut' -identity ${user} 
 
-if(Unlock-ADAccount -Identity ${user}){
- $user
-}
-else{
- $err
-}
-
-
+              $succMsg = "Unlocked user ${user}"
+              $errMsg = "Account is not locked"
               
+              if($user.LockedOut -eq $true){
+              Unlock-ADAccount -Identity ${user}
+              $succMsg
+              }
+              else{
+              $errMsg
+              }
+            
               
               `);
              
@@ -56,7 +57,7 @@ else{
                 res.status(200).send(output)
              }).catch(error => {
                 console.log('err')
-                res.status(422).send('Error')
+                res.status(422).send(error.toString())
              });      
       });  
 }
