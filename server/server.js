@@ -26,6 +26,7 @@ PrinterController.index();
 PowershellController.index();
 PowershellController.unlockUser();
 PowershellController.getAllUsers();
+PowershellController.RDPSccm();
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));

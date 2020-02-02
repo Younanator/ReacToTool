@@ -96,7 +96,6 @@ const getAllUsers = async () => {
                         })
                  })
                 
-                
                 res.status(200).send(users)
              }).catch(error => {
                 console.log('err')
@@ -107,10 +106,32 @@ const getAllUsers = async () => {
 
   
 
+const RDPSccm = async () => {
+    app.get("/api/RDP",  function(req, res) {
+
+        const {computer} = req.query;
+           
+              ps.addCommand(`
+              mstsc /v:${computer}
+
+              `);
+             
+             ps.invoke().then(output => {
+                
+                
+                res.status(200).send(`Connected to ${computer}`)
+             }).catch(error => {
+                
+                res.status(422).send('Error')
+             });      
+      });  
+}
+
     return Object.create({
         index,
         unlockUser,
-        getAllUsers
+        getAllUsers,
+        RDPSccm
         // ...
     })
 }

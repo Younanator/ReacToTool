@@ -105,11 +105,11 @@ export const DropdownUsers = () => {
     return(
         <div style={{width:'50%'}}>
             <div className="rowFlex" >
-            <input value={user} onChange={(e) => setUser(e.target.value)} type="text" class="form-control" placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+            <input value={user} onChange={(e) => setUser(e.target.value)} type="text"  placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
             <button onClick={() => UnlockUser()} type="button" class="btn btn-primary">Unlock Account</button>
-
             {unlockSucc}
             {unlockSpinner ? <p>...Unlocking</p> : null}
+            <RDPSccm></RDPSccm>
             </div>
             {getUsersSpinner ? <p>...Grabbing users</p> : null}
             {user.length > 0 ? userList.filter(e => {
@@ -123,6 +123,40 @@ export const DropdownUsers = () => {
                         </div>
                 )
             }): null}
+        </div>
+    )
+}
+
+
+ export const RDPSccm = () => {
+    const [computer,setComp] = useState('')
+   const [resp,setResp] = useState('')
+    
+    
+    const RDPSess = async () => {
+        try {
+            
+            const users = await Axios.get(`${urlHeader}/RDP`,{
+                params:{
+                    computer
+                }
+            })
+
+            setResp(users.data)
+           
+        } catch (error) {
+             setResp('Error')
+        }
+    }
+    
+    return (
+        <div>
+        <div className="rowFlex">
+        <input value={computer} onChange={(e) => setComp(e.target.value)}></input>
+        <button onClick={() => RDPSess() } type="button" class="btn btn-primary">Connect</button>
+
+        </div>
+        {resp}
         </div>
     )
 }
