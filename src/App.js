@@ -1,20 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import {AdobeDisabled} from '../src/components/AdobeDisabled'
+import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
-import { PrinterRemoval } from './components/Printer';
-import Routes from './routes/routes'
-import { BrowserRouter, Link,withRouter } from 'react-router-dom';
-import { TreeGraph } from './components/Tree';
 import Navbar from './components/Navbar';
 import { Username } from './components/User';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
+import Routes from './routes/routes';
+import {Provider} from 'react-redux'
+import {store} from './redux/store'
 
 function App() {
   return (
+    <Provider store={store}>
     <BrowserRouter>
     <div>
       <Navbar></Navbar>
@@ -28,6 +25,7 @@ function App() {
       <ToastContainer></ToastContainer>
     </div>
     </BrowserRouter>
+    </Provider>
   );
 }
 

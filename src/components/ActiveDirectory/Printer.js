@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid'
 import Axios from 'axios'
-import {urlHeader} from '../config/config'
+import {urlHeader} from '../../config/config'
 
 
 

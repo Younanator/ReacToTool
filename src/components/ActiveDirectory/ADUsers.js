@@ -1,10 +1,11 @@
 
-
+import { shallowEqual, useDispatch,useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid'
 import Axios from 'axios'
-import {urlHeader} from '../config/config'
+import {urlHeader} from '../../config/config'
 import { toast } from 'react-toastify';
+
 
 export const ADUser = () => {
     
@@ -50,9 +51,10 @@ export const ADUser = () => {
 
 export const DropdownUsers = () => {
 
-    const [userList,setUsers] = useState([])
+    const userList = useSelector(state => state.ActiveDirectory.users)
+
+    const dispatch = useDispatch();
     const [err,setErr] = useState('')
-    const [filList,setFil] = useState([])
     const [unlockSpinner,setUnlockSpinner] = useState(false)
     const [getUsersSpinner,setUsersSpinner] = useState(false)
     const [user,setUser] = useState('')
@@ -77,37 +79,37 @@ export const DropdownUsers = () => {
     }
 }
 
-    const getUsers = async () => {
-        try {
+    const getUsers = () => dispatch => {
+        
             setUsersSpinner(true)
-            const users = await Axios.get(`${urlHeader}/AllUsers`)
-            console.log(users.data)
-            
-            setUsers(users.data)
-            setUsersSpinner(false)
-        } catch (error) {
-            setErr('Couldnt fetch users')
-            setUsersSpinner(false)
-        }
+             Axios.get(`${urlHeader}/AllUsers`).then(resp => {
+                dispatch({type: 'GET_USERS', payload:resp.data})
+                setUsersSpinner(false)
+                
+             },err => {
+                setErr('Couldnt fetch users')
+                setUsersSpinner(false)
+             })
+        
     }
 
     useEffect(() => {
         if(userList.length === 0){
-            getUsers()
+            dispatch(getUsers())
         }
-    },[userList])
+    },[userList,dispatch])
 
     return(
-        <div>
-            <div className="rowFlex">
+        <div style={{width:'50%'}}>
+            <div className="rowFlex" >
             <input value={user} onChange={(e) => setUser(e.target.value)} type="text" class="form-control" placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-            
-            <button onClick={() => UnlockUser()}>Unlock Account</button>
+            <button onClick={() => UnlockUser()} type="button" class="btn btn-primary">Unlock Account</button>
+
             {unlockSucc}
             {unlockSpinner ? <p>...Unlocking</p> : null}
             </div>
             {getUsersSpinner ? <p>...Grabbing users</p> : null}
-            {userList.filter(e => {
+            {user.length > 0 ? userList.filter(e => {
                 return e.name.toLowerCase().indexOf(user.toLowerCase()) >= 0
             }).map(e => {
                 return (
@@ -117,7 +119,7 @@ export const DropdownUsers = () => {
                             <hr></hr>
                         </div>
                 )
-            })}
+            }): null}
         </div>
     )
 }

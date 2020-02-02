@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid'
 import Axios from 'axios'
-import { AdobeDisabled } from '../components/AdobeDisabled';
-import { PrinterRemoval } from '../components/Printer';
-import { DropdownUsers } from '../components/ADUsers';
+import { PrinterRemoval } from '../components/ActiveDirectory/Printer';
+import { DropdownUsers } from '../components/ActiveDirectory/ADUsers';
+
 
 export const ActiveDirectory = () => {
     
     return (
         <div>
             
-            <PrinterRemoval></PrinterRemoval>
-            <DropdownUsers></DropdownUsers>
+           <PrinterRemoval></PrinterRemoval>
+           <DropdownUsers></DropdownUsers>
         </div>
     )
 }
