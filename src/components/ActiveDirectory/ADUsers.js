@@ -62,7 +62,7 @@ export const DropdownUsers = () => {
     
     const UnlockUser = async () => {
         try {
-            setUnlockSucc('')
+            
             setUnlockSpinner(true)
             const users = await Axios.get(`${urlHeader}/UnlockAD`,{
                 params: {
@@ -70,8 +70,11 @@ export const DropdownUsers = () => {
                 }            
             })
             
-            toast(users.data,{type:'success'})
-            setUnlockSucc(users.data)
+            
+            users.data.includes(" is not locked")
+            ? toast(users.data,{type:'warning'})
+            : toast(users.data,{type:"success"})
+            
             setUnlockSpinner(false)
         } catch (error) {       
             setErr(error.data)

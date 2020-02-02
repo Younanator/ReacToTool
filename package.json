@@ -17,9 +17,7 @@
       "category": "public.app-category.utilities"
     },
     "files": [
-      "build/**/*",
-      "node_modules/**/*",
-      "server/**/*"
+      "build/**/*"
     ],
     "directories": {
       "buildResources": "assets"
