@@ -27,6 +27,8 @@ PowershellController.index();
 PowershellController.unlockUser();
 PowershellController.getAllUsers();
 PowershellController.RDPSccm();
+PowershellController.RemoteSccm();
+PowershellController.GetSccmUsers();
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));

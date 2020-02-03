@@ -96,6 +96,8 @@ export const DropdownUsers = () => {
         
     }
 
+    
+
     useEffect(() => {
         if(userList.length === 0){
             dispatch(getUsers())
@@ -110,6 +112,7 @@ export const DropdownUsers = () => {
             {unlockSucc}
             {unlockSpinner ? <p>...Unlocking</p> : null}
             <RDPSccm></RDPSccm>
+            
             </div>
             {getUsersSpinner ? <p>...Grabbing users</p> : null}
             {user.length > 0 ? userList.filter(e => {
@@ -130,7 +133,10 @@ export const DropdownUsers = () => {
 
  export const RDPSccm = () => {
     const [computer,setComp] = useState('')
-   const [resp,setResp] = useState('')
+    const [resp,setResp] = useState('')
+    const [user,setUser] = useState('')
+    const userList = useSelector(state => state.ActiveDirectory.users)
+    const [computers,setComps] = useState([])
     
     
     const RDPSess = async () => {
@@ -148,15 +154,78 @@ export const DropdownUsers = () => {
              setResp('Error')
         }
     }
+
+    const RemoteSess = async () => {
+        try {
+            
+            const data = await Axios.get(`${urlHeader}/Remote`,{
+                params:{
+                    computer
+                }
+            })
+
+            setResp(data.data)
+           
+        } catch (error) {
+             toast()
+        }
+    }
+
     
+    const UserComputer = async () => {
+        try {
+            
+            const data = await Axios.get(`${urlHeader}/SccmUsers`,{
+                params:{
+                    user
+                }
+            })
+            
+            setComp(data.data)
+            
+        } catch (error) {
+            toast('Error grabbing SCCM user',{type:"error"})
+        }
+    }
+    
+    useEffect(() => {
+        
+    },[userList])
+
     return (
         <div>
+           
         <div className="rowFlex">
         <input value={computer} onChange={(e) => setComp(e.target.value)}></input>
-        <button onClick={() => RDPSess() } type="button" class="btn btn-primary">Connect</button>
-
+        <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Connect
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a onClick={() => RDPSess() } class="dropdown-item" href="#">RDP</a>
+    <a  onClick={() => RemoteSess() }class="dropdown-item" href="#">Remote</a>
+  </div>
+    </div>
         </div>
         {resp}
+        <div className="rowFlex">
+        <input value={user} onChange={(e) => setUser(e.target.value)} type="text"  placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+        <button onClick={() => UserComputer()}>Get Computers</button>
+        </div>
+        {user.length > 0 ? userList.filter(e => {
+                return e.name.toLowerCase().indexOf(user.toLowerCase()) >= 0
+            }).map(e => {
+                return (
+                    
+                        <div key={uuid()} onClick={() => setUser(e.samAcc)}>
+                            {e.name}
+                            <hr></hr>
+                        </div>
+                )
+            }): null}
+        
+            
         </div>
     )
 }
+

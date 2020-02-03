@@ -2,7 +2,8 @@
 
 
 const initialState = {
-    users:[]
+    users:[],
+    
 };
 
 export default function(state = initialState, action){
