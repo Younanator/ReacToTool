@@ -17,11 +17,12 @@ function App() {
       <Navbar></Navbar>
 
      
-     
+      <div style={{marginTop:'30px'}}></div>
       <Username></Username>
-      <div style={{marginTop:'30px'}}>
+      <div style={{marginTop:'30px'}}></div>
+       
       <Routes></Routes>
-      </div>
+      
       <ToastContainer></ToastContainer>
     </div>
     </BrowserRouter>

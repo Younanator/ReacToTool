@@ -16,11 +16,11 @@ const Navbar = () => {
 <div class="left" onClick={() => history.push('/Active')}>
   <div class="text"><Link to="/Active">Active Directory</Link></div>
 </div>
-<div class="center" >
-  <div class="explainer"><span>Navigation</span></div>
+<div class="center" onClick={() => history.push('/Home')}>
+  <div class="explainer"><span>Home</span></div>
 </div>
-<div class="right" onClick={() => history.push('/')}>
-  <div class="text"><Link to="/"> SCCM</Link></div>
+<div class="right" onClick={() => history.push('/Sccm')}>
+  <div class="text"><Link> SCCM</Link></div>
 </div>
 <div class="righter" onClick={() => history.push('/Adobe')}>
   <div class="text"><Link to="/Adobe"> Adobe</Link></div>

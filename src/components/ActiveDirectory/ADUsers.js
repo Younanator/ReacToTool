@@ -174,14 +174,18 @@ export const DropdownUsers = () => {
     
     const UserComputer = async () => {
         try {
+
+            const data = {
+                user
+            }
             
-            const data = await Axios.get(`${urlHeader}/SccmUsers`,{
-                params:{
-                    user
-                }
+            const sccmUsers = await Axios(`${urlHeader}/SccmUsers`,{
+                method:'GET',
+                withCredentials:true,
+                params:data
             })
             
-            setComp(data.data)
+            setComp(sccmUsers.data)
             
         } catch (error) {
             toast('Error grabbing SCCM user',{type:"error"})

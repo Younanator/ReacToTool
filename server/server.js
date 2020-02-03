@@ -12,6 +12,7 @@ app.use(cors({origin: 'http://localhost:3000',credentials:true,allowedHeaders:['
 
 
 const ps = new Shell({
+  verbose:true,
     executionPolicy: 'Bypass',
     noProfile: true,
   });
