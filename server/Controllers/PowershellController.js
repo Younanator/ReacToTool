@@ -1,3 +1,6 @@
+const { exec } = require('child_process');
+
+
 
 
 module.exports = (app,ps) => {
@@ -150,40 +153,48 @@ const RemoteSccm = async () => {
 
 }
 
-const sleep = async (time) => new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve()
-    }, time)
-  })
 
 
 const GetSccmUsers = async () => {
     app.get("/api/SccmUsers",  function(req, res) {
 
            const {user} = req.query;
-           console.log(user)
+           const namespace =`root\\sms\\site_STP`.replace(/\\/g,'/')
+
+           
+           
+           ps.addCommand(`
+           function Get-Users {
+            param (
+                [Parameter(Mandatory = $true)] 
+                [string] $user
+            )
+            
+            $Computers=(Get-WmiObject -namespace ${namespace} -query "SELECT SMS_R_System.Name FROM SMS_R_SYSTEM WHERE LastLogonUserName='$user'" -computer "syd1scm01.ce.corp" )
+                    foreach ($computer in $computers) {
+                                $computer.Name
+                        }
+            }
+            
+            $userComps = Get-users -user ${user}
+            $userComps
+           `);
+           
+           ps.invoke().then(output => {
+
+                
+            const computers = output.split('\n').filter(e => {
+               return e !== ''
+            })
+            
+            res.status(200).send(computers)
+         }).catch(error => {
+            console.log(error)
+            res.status(422).send(error)
+         }); 
+
            
          
-             ps.addCommand(`& "${require('path').resolve(__dirname, `./SCCM-Script.ps1`)}"`)
-             .then(() => ps.addArgument(user))
-
-             
-
-             
-             
-
-
-             ps.invoke().then(output => {
-
-                
-
-                const computers = output.split('\n')
-                
-                res.status(200).send(computers)
-             }).catch(error => {
-                console.log(error)
-                res.status(422).send(error)
-             });      
       });  
 
 }

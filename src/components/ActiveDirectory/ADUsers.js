@@ -201,7 +201,10 @@ export const DropdownUsers = () => {
         <div>
         <div className="colFlex">
             <div className="rowFlex">
-            <input value={computer} onChange={(e) => setComp(e.target.value)}></input>
+            <textarea value={computer} onChange={(e) => setComp(e.target.value)} rows="4" cols="50">
+             
+            </textarea>
+            
         <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Connect

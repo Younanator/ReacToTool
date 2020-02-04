@@ -1,8 +1,4 @@
-﻿param (
-    [Parameter(Mandatory = $false)] 
-    [string] $userInput = 'chris.younan'
-)
-
+﻿
 function Get-Users {
 param (
     [Parameter(Mandatory = $true)] 
