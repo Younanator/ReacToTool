@@ -17,8 +17,10 @@ function App() {
       <Navbar></Navbar>
 
      
-      <div style={{marginTop:'30px'}}></div>
+      <div style={{display:'flex',margin:'auto',width:'20%',backgroundColor:'#8e8eda',justifyContent:'center'}}>
       <Username></Username>
+      </div>
+      
       <div style={{marginTop:'30px'}}></div>
        
       <Routes></Routes>

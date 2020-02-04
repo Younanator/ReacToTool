@@ -164,9 +164,9 @@ const GetSccmUsers = async () => {
            console.log(user)
            
          
-             ps.addCommand(`& "${require('path').resolve(__dirname, `./SCCM-Script.ps1`)}"`,[{
-                name:'user',value:user
-             }])
+             ps.addCommand(`& "${require('path').resolve(__dirname, `./SCCM-Script.ps1`)}"`)
+             .then(() => ps.addArgument(user))
+
              
 
              

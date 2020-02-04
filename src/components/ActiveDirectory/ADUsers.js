@@ -111,7 +111,6 @@ export const DropdownUsers = () => {
             <button onClick={() => UnlockUser()} type="button" class="btn btn-primary">Unlock Account</button>
             {unlockSucc}
             {unlockSpinner ? <p>...Unlocking</p> : null}
-            <RDPSccm></RDPSccm>
             
             </div>
             {getUsersSpinner ? <p>...Grabbing users</p> : null}
@@ -197,25 +196,36 @@ export const DropdownUsers = () => {
     },[userList])
 
     return (
-        <div>
+        <div >
            
-        <div className="rowFlex">
-        <input value={computer} onChange={(e) => setComp(e.target.value)}></input>
+        <div>
+        <div className="colFlex">
+            <div className="rowFlex">
+            <input value={computer} onChange={(e) => setComp(e.target.value)}></input>
         <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Connect
   </button>
+  <div className="colFlex">
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a onClick={() => RDPSess() } class="dropdown-item" href="#">RDP</a>
     <a  onClick={() => RemoteSess() }class="dropdown-item" href="#">Remote</a>
+    
   </div>
+  </div>
+  
     </div>
-        </div>
-        {resp}
+            </div>
         <div className="rowFlex">
         <input value={user} onChange={(e) => setUser(e.target.value)} type="text"  placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
         <button onClick={() => UserComputer()}>Get Computers</button>
         </div>
+        
+        </div>
+        
+        </div>
+        {resp}
+        
         {user.length > 0 ? userList.filter(e => {
                 return e.name.toLowerCase().indexOf(user.toLowerCase()) >= 0
             }).map(e => {

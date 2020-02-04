@@ -1,15 +1,23 @@
 ﻿param (
+    [Parameter(Mandatory = $false)] 
+    [string] $userInput = 'chris.younan'
+)
+
+function Get-Users {
+param (
     [Parameter(Mandatory = $true)] 
     [string] $user
 )
 
-$Computers=(Get-WmiObject -namespace 'root\sms\site_STP' -query "
-SELECT SMS_R_System.Name 
-FROM SMS_R_SYSTEM 
-WHERE LastLogonUserName='$user'" -computer "syd1scm01.ce.corp" )
-                foreach ($computer in $computers) {
+$Computers=(Get-WmiObject -namespace 'root\sms\site_STP' -query "SELECT SMS_R_System.Name FROM SMS_R_SYSTEM WHERE LastLogonUserName='$user'" -computer "syd1scm01.ce.corp" )
+        foreach ($computer in $computers) {
                     $computer.Name
             }
+}
+
+$userComps = Get-users -user $userInput
+$userComps
+
 
             
 

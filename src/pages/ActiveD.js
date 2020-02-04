@@ -10,9 +10,13 @@ export const ActiveDirectory = () => {
     return (
         <div>
             <div className="colFlex">
-            <PrinterRemoval></PrinterRemoval>
-           <DropdownUsers></DropdownUsers>
-           
+                <div style={{display:'flex',justifyContent:'center',width:'30%',margin:'auto'}}>
+                <PrinterRemoval></PrinterRemoval>
+                </div>
+            <div className="colFlex" style={{width:'auto',minWidth:'40%',maxWidth:'80%',margin:'auto',backgroundColor:'#b4b4f1'}}>
+            <DropdownUsers></DropdownUsers>
+            <RDPSccm></RDPSccm>
+            </div>
             </div>
            
         </div>

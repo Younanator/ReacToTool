@@ -9,7 +9,7 @@ const Navbar = () => {
     const history = useHistory()
 
     return (
-        <div class="all">
+        <div class="all" style={{width:'80%',margin:'auto'}}>
 <div onClick={() => history.push('/Tree')} class="lefter">
 <div class="text"><Link to="/Tree">Tree</Link></div>
 </div>

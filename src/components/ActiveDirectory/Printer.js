@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid'
 import Axios from 'axios'
 import {urlHeader} from '../../config/config'
+import { toast } from 'react-toastify';
 
 
 
@@ -20,7 +21,7 @@ export const PrinterRemoval = () => {
             setSpinner(false)
         } catch (error) {
             console.log(error)
-            setErr('Check Output from powershell')
+            toast('Check the script output',{type:'success'})
             setSpinner(false)
         }
     }
