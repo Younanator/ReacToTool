@@ -13,7 +13,7 @@ function App() {
   return (
     <Provider store={store}>
     <BrowserRouter>
-    <div>
+    <div style={{display:'flex',flexDirection:'column'}}>
       <Navbar></Navbar>
 
      
