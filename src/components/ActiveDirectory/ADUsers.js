@@ -5,6 +5,7 @@ import uuid from 'react-uuid'
 import Axios from 'axios'
 import {urlHeader} from '../../config/config'
 import { toast } from 'react-toastify';
+import Skeleton from 'react-loading-skeleton';
 
 
 export const ADUser = () => {
@@ -134,6 +135,7 @@ export const DropdownUsers = () => {
  export const RDPSccm = ({user}) => {
     const [computer,setComp] = useState('')
     const [resp,setResp] = useState('')
+    const [fetchComp,setFetchComps] = useState(false)
     
     const userList = useSelector(state => state.ActiveDirectory.users)
     
@@ -178,16 +180,17 @@ export const DropdownUsers = () => {
             const data = {
                 user
             }
-            
+            setFetchComps(true)
             const sccmUsers = await Axios(`${urlHeader}/SccmUsers`,{
                 method:'GET',
                 withCredentials:true,
                 params:data
             })
-            
+            setFetchComps(false)
             setComp(sccmUsers.data)
             
         } catch (error) {
+            setFetchComps(false)
             toast('Error grabbing SCCM user',{type:"error"})
         }
     }
@@ -202,7 +205,11 @@ export const DropdownUsers = () => {
         <div>
         <div className="colFlex">
             <div className="rowFlex">
-            <textarea style={{minWidth:'200px'}} value={computer} onChange={(e) => setComp(e.target.value)} rows="4" cols="50"/>
+                {fetchComp 
+                ? <Skeleton width={200} height={100} ></Skeleton>
+                : <textarea style={{minWidth:'200px'}} value={computer} onChange={(e) => setComp(e.target.value)} rows="4" cols="50"/>
+
+            }
              
            
             
