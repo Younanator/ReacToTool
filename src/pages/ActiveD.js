@@ -7,12 +7,29 @@ import { DropdownUsers,RDPSccm } from '../components/ActiveDirectory/ADUsers';
 
 export const ActiveDirectory = () => {
      const [links,setLinks] = useState('')
+
+     const ToggleLinks = () => {
+        return(
+          <div style={{width:'40px'}}>
+    <nav class="btn-pluss-wrapper">
+     <div href="#" class="btn-pluss">
+      <ul>
+        <li><a onClick={() => setLinks('Printing')}>Printing</a></li>
+        <li><a onClick={() => setLinks('Active Directory')}>AD</a></li>
+      </ul>
+     </div>
+    </nav>
+          </div>
+    
+        )
+      }
+
     return (
         <div>
-             <div className="rowFlex" style={{justifyContent:'space-around',backgroundColor:'yellow'}}>
-                 <p  onClick={() => setLinks('Printing')}>Printing</p>
-                 <p onClick={() => setLinks('Active Directory')}>Active Directory</p>
-             </div>
+            <div style={{display:'flex',width:'50%',margin:'auto',justifyContent:'center'}}>
+            <ToggleLinks></ToggleLinks> 
+            </div>
+             
             <div className="colFlex">
                {links === 'Printing' ? <div style={{display:'flex',justifyContent:'center',width:'30%',margin:'auto'}}>
                 <PrinterRemoval></PrinterRemoval>
@@ -36,3 +53,6 @@ export const ActiveDirectory = () => {
         </div>
     )
 }
+
+
+

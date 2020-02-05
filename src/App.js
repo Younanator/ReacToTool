@@ -13,7 +13,7 @@ function App() {
   return (
     <Provider store={store}>
     <BrowserRouter>
-    <div style={{display:'flex',flexDirection:'column'}}>
+    <div style={{display:'flex',flexDirection:'column',overflow:'hidden'}}>
       <Navbar></Navbar>
 
      
@@ -21,7 +21,7 @@ function App() {
       <Username></Username>
       </div>
       
-      <div style={{marginTop:'30px'}}></div>
+      
        
       <Routes></Routes>
       

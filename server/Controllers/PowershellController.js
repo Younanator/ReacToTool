@@ -172,24 +172,38 @@ const GetSccmUsers = async () => {
             
             $Computers=(Get-WmiObject -namespace ${namespace} -query "SELECT SMS_R_System.Name FROM SMS_R_SYSTEM WHERE LastLogonUserName='$user'" -computer "syd1scm01.ce.corp" )
                     foreach ($computer in $computers) {
-                                $computer.Name
+                                
+                     $compName = $computer.name
+                     $Loggedon = Get-WmiObject -ComputerName $compName -ErrorAction SilentlyContinue -Authentication PacketIntegrity -Class Win32_Computersystem | Select-Object UserName
+                     $loggedOnUser = $Loggedon.UserName
+
+                     if($loggedOnUser){
+                        $compName
+                     }
+                     
+                    
                         }
             }
             
+
             $userComps = Get-users -user ${user}
             $userComps
+         
            `);
            
            ps.invoke().then(output => {
-
+               
                 
             const computers = output.split('\n').filter(e => {
                return e !== ''
-            })
+            });
+            
+            
+            
             
             res.status(200).send(computers)
          }).catch(error => {
-            console.log(error)
+            
             res.status(422).send(error)
          }); 
 
@@ -199,6 +213,20 @@ const GetSccmUsers = async () => {
 
 }
 
+const openLink = () => {
+   app.get("/api/Link",  function(req, res) {
+      
+      const {app,link} = req.query;
+      
+      exec(`start "" ${app} ${link}`)
+      
+      res.status(200).send(`Opened ${link}`)
+
+      
+    
+ });  
+}
+
 
     return Object.create({
         index,
@@ -206,7 +234,8 @@ const GetSccmUsers = async () => {
         getAllUsers,
         RDPSccm,
         RemoteSccm,
-        GetSccmUsers
+        GetSccmUsers,
+        openLink
         // ...
     })
 }
