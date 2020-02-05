@@ -8,17 +8,19 @@ import {urlHeader} from '../config/config'
 
 export const Username = () => {
      
-    const [username,setUser] = useState('')
+    const [username,setUser] = useState('None')
+
     useEffect(() => {
         const userStorage = localStorage.getItem('username')
-        if(userStorage !== undefined){
+        console.log(userStorage)
+        if(userStorage !== null){
           setUser(localStorage.getItem('username'))
         } 
     },[username])
 
     return (
         <div>
-         {username !== '' ? <div>{username}</div> : <AddUsername></AddUsername>}
+         {username !== 'None' ? <div>{username}</div> : <AddUsername></AddUsername>}
         </div>
     )
   }
@@ -33,7 +35,7 @@ export const Username = () => {
 
      return (
          <div className="rowFlex">
-        <p></p><input onChange={(e) => setUser(e.target.value)}></input>
+        <p></p><input placeholder="Enter network username" onChange={(e) => setUser(e.target.value)}></input>
         <button onClick={() => addUser()}>Set username</button>
          </div>
     )

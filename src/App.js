@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
     <div style={{display:'flex',flexDirection:'column',overflow:'hidden'}}>
       <Navbar></Navbar>
-
+         
      
       <div style={{display:'flex',margin:'auto',width:'20%',backgroundColor:'#8e8eda',justifyContent:'center'}}>
       <Username></Username>
