@@ -23,6 +23,7 @@ const adminLinks = [
     {link:'https://10.20.200.10/ccmadmin/showHome.do',name:'Call Manager',app:'chrome'},
     {link:'https://syd1inf65/webadmin/sessionExpired.action',name:'Vasco',app:'chrome'},
     {link:'https://nagios.ce.corp/nagios/',name:'Nagios',app:'chrome'},
+    {link:'https://10.20.22.142/admin/',name:'View Administrator',app:'iexplore'}
 ]
 
 

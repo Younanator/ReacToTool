@@ -84,13 +84,13 @@ export const DropdownUsers = () => {
 
     const getUsers = () => dispatch => {
         
-            setUsersSpinner(true)
+        toast('Grabbing AD Users',{type:'info'})
              Axios.get(`${urlHeader}/AllUsers`).then(resp => {
                 dispatch({type: 'GET_USERS', payload:resp.data})
-                setUsersSpinner(false)
+                toast('Got All AD Users',{type:'success'})
                 
              },err => {
-                setErr('Couldnt fetch users')
+                toast('Failed to grab users',{type:'error'})
                 setUsersSpinner(false)
              })
         
@@ -107,13 +107,14 @@ export const DropdownUsers = () => {
     return(
         <div style={{width:'50%'}}>
             <div className="rowFlex" >
-            <input value={user} onChange={(e) => setUser(e.target.value)} type="text"  placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
+            <input style={{width:'200px'}} value={user} onChange={(e) => setUser(e.target.value)} type="text"  placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
             <button onClick={() => UnlockUser()} type="button" class="btn btn-primary">Unlock Account</button>
             {unlockSucc}
             {unlockSpinner ? <p>...Unlocking</p> : null}
             
             </div>
-            {getUsersSpinner ? <p>...Grabbing users</p> : null}
+            <RDPSccm user={user}></RDPSccm>
+            
             {user.length > 0 ? userList.filter(e => {
                 return e.name.toLowerCase().indexOf(user.toLowerCase()) >= 0
             }).map(e => {
@@ -130,12 +131,12 @@ export const DropdownUsers = () => {
 }
 
 
- export const RDPSccm = () => {
+ export const RDPSccm = ({user}) => {
     const [computer,setComp] = useState('')
     const [resp,setResp] = useState('')
-    const [user,setUser] = useState('')
+    
     const userList = useSelector(state => state.ActiveDirectory.users)
-    const [computers,setComps] = useState([])
+    
     
     
     const RDPSess = async () => {
@@ -201,12 +202,13 @@ export const DropdownUsers = () => {
         <div>
         <div className="colFlex">
             <div className="rowFlex">
-            <textarea value={computer} onChange={(e) => setComp(e.target.value)} rows="4" cols="50">
+            <textarea style={{minWidth:'200px'}} value={computer} onChange={(e) => setComp(e.target.value)} rows="4" cols="50"/>
              
-            </textarea>
+           
             
         <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div className="colFlex">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Connect
   </button>
   <div className="colFlex">
@@ -216,30 +218,20 @@ export const DropdownUsers = () => {
     
   </div>
   </div>
+        <button onClick={() => UserComputer()}>Get Computers</button>
+        </div>
+  
+  
   
     </div>
             </div>
-        <div className="rowFlex">
-        <input value={user} onChange={(e) => setUser(e.target.value)} type="text"  placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
-        <button onClick={() => UserComputer()}>Get Computers</button>
-        </div>
+        
         
         </div>
         
         </div>
         {resp}
         
-        {user.length > 0 ? userList.filter(e => {
-                return e.name.toLowerCase().indexOf(user.toLowerCase()) >= 0
-            }).map(e => {
-                return (
-                    
-                        <div key={uuid()} onClick={() => setUser(e.samAcc)}>
-                            {e.name}
-                            <hr></hr>
-                        </div>
-                )
-            }): null}
         
             
         </div>
