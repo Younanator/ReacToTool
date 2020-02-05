@@ -7,7 +7,7 @@ import { ToggleMenu } from '../components/ToggleMenu';
 
 export const Home = () => {
     const links = [
-        {link:"https://serviceit.winc.com.au/helpdesk/tickets",name:'ServiceIT',app:'chrome'},
+        {link:"https://serviceit.winc.com.au/helpdesk/tickets",name:'ServiceIT'},
         {link:"https://adminconsole.adobe.com/enterprise",name:'Adobe Admin'},
 ,{link:'https://www.mailcontrol.com/login/login_form.mhtml?sid=6c3294cbd80b1b1e79809b69ffe27bb2&cobrand=&error=NOTRECOGNISED&redirect_to=%2Fportal%2Findex.mhtml&username=',name:'ForcePoint'}
     ,{link:'https://staplesanz.my.salesforce.com/home/home.jsp',name:'SalesForce'}
