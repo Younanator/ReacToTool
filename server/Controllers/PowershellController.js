@@ -73,14 +73,15 @@ const getAllUsers = async () => {
         
            
               ps.addCommand(`
-              $users = Get-ADUser -Filter * -SearchBase "OU=User Accounts,DC=CE,DC=CORP"
+              $users = Get-ADUser -Filter * -SearchBase "OU=User Accounts,DC=CE,DC=CORP" -Properties Manager,LockedOut,Title,passwordlastset,passwordneverexpires
               $myobject = @()
               
               for($i=0; $i -lt $users.length; $i++){
               $str = ''
-              $str += $users[$i].Name + ',' + $users[$i].SamAccountName
-              
-              $myobject += $str
+              $str += 
+              $users[$i].Name + ',' + $users[$i].SamAccountName + ',' + $users[$i].Manager + ',' + $users[$i].Title + ',' + $users[$i].PasswordLastSet
+
+             $myobject += $str
               }
               
               $myobject
@@ -96,7 +97,8 @@ const getAllUsers = async () => {
                      const split = e.split(',')
                      users.push({
                          name:split[0],
-                         samAcc:split[1]
+                         samAcc:split[1],
+                         manager:split[2]
                         })
                  })
                 

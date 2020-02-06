@@ -50,21 +50,16 @@ export const ADUser = () => {
     )
   }
 
-export const DropdownUsers = () => {
+export const DropdownUsers = () =>{
 
     const userList = useSelector(state => state.ActiveDirectory.users)
-
     const dispatch = useDispatch();
-    const [err,setErr] = useState('')
-    const [unlockSpinner,setUnlockSpinner] = useState(false)
-    const [getUsersSpinner,setUsersSpinner] = useState(false)
     const [user,setUser] = useState('')
-    const [unlockSucc,setUnlockSucc] = useState('')
-    
+
     const UnlockUser = async () => {
         try {
             
-            setUnlockSpinner(true)
+            toast('Unlocking...',{type:"success"})
             const users = await Axios.get(`${urlHeader}/UnlockAD`,{
                 params: {
                   user
@@ -76,10 +71,11 @@ export const DropdownUsers = () => {
             ? toast(users.data,{type:'warning'})
             : toast(users.data,{type:"success"})
             
-            setUnlockSpinner(false)
+            
         } catch (error) {       
-            setErr(error.data)
-            setUnlockSpinner(false)
+            
+            toast(error.data,{type:'warning'})
+            
     }
 }
 
@@ -92,10 +88,12 @@ export const DropdownUsers = () => {
                 
              },err => {
                 toast('Failed to grab users',{type:'error'})
-                setUsersSpinner(false)
+                
              })
         
     }
+
+    
 
     
 
@@ -106,12 +104,12 @@ export const DropdownUsers = () => {
     },[userList,dispatch])
 
     return(
-        <div style={{width:'50%'}}>
+        <div style={{width:'50%',fontSize:'0.75rem'}}>
             <div className="rowFlex" >
             <input style={{width:'200px'}} value={user} onChange={(e) => setUser(e.target.value)} type="text"  placeholder="User name" aria-label="Recipient's username" aria-describedby="basic-addon2"/>
             <button onClick={() => UnlockUser()} type="button" class="btn btn-primary">Unlock Account</button>
-            {unlockSucc}
-            {unlockSpinner ? <p>...Unlocking</p> : null}
+            
+            
             
             </div>
             <RDPSccm user={user}></RDPSccm>

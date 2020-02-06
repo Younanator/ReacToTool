@@ -101,6 +101,24 @@ const myTreeData = [
           keyB: 'val B',
           keyC: 'val C',
         },
+        children:[
+          {
+            name: 'Davidson',
+            attributes: {
+              item: 'val A',
+              keyB: 'val B',
+              keyC: 'val C',
+            },
+          },
+          {
+            name: 'Rebecca',
+            attributes: {
+              item: 'val A',
+              keyB: 'val B',
+              keyC: 'val C',
+            },
+          }
+        ]
           }
         ]
       },
