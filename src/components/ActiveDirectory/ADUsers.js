@@ -1,12 +1,19 @@
 
 import { shallowEqual, useDispatch,useSelector } from 'react-redux';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef} from 'react';
 import uuid from 'react-uuid'
 import Axios from 'axios'
 import {urlHeader} from '../../config/config'
 import { toast } from 'react-toastify';
 import Skeleton from 'react-loading-skeleton';
 
+export const usePrevious = (value) => {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
 
 export const ADUser = () => {
     
@@ -55,6 +62,13 @@ export const DropdownUsers = () =>{
     const userList = useSelector(state => state.ActiveDirectory.users)
     const dispatch = useDispatch();
     const [user,setUser] = useState('')
+    const [samAcc,setSam] = useState('')
+    const prevUser = usePrevious(samAcc)
+
+    const setUsers = (name,samAcc) => {
+        setUser(name)
+        setSam(samAcc)
+    }
 
     const UnlockUser = async () => {
         try {
@@ -62,7 +76,7 @@ export const DropdownUsers = () =>{
             toast('Unlocking...',{type:"success"})
             const users = await Axios.get(`${urlHeader}/UnlockAD`,{
                 params: {
-                  user
+                  user:samAcc
                 }            
             })
             
@@ -101,6 +115,7 @@ export const DropdownUsers = () =>{
         if(userList.length === 0){
             dispatch(getUsers())
         }
+        
     },[userList,dispatch])
 
     return(
@@ -112,14 +127,14 @@ export const DropdownUsers = () =>{
             
             
             </div>
-            <RDPSccm user={user}></RDPSccm>
+            <RDPSccm user={samAcc} prevUser={prevUser}></RDPSccm>
             
             {user.length > 0 ? userList.filter(e => {
                 return e.name.toLowerCase().indexOf(user.toLowerCase()) >= 0
             }).map(e => {
                 return (
                     
-                        <div key={uuid()} onClick={() => setUser(e.samAcc)}>
+                        <div key={uuid()} onClick={() => setUsers(e.name,e.samAcc)}>
                             {e.name}
                             <hr></hr>
                         </div>
@@ -130,13 +145,12 @@ export const DropdownUsers = () =>{
 }
 
 
- export const RDPSccm = ({user}) => {
+ export const RDPSccm = ({user,prevUser}) => {
     const [computer,setComp] = useState('')
     const [resp,setResp] = useState('')
     const [fetchComp,setFetchComps] = useState(false)
-    
     const userList = useSelector(state => state.ActiveDirectory.users)
-    
+    const [userObj,setUserObj] = useState({})
     
     
     const RDPSess = async () => {
@@ -171,6 +185,8 @@ export const DropdownUsers = () =>{
         }
     }
 
+   
+
     
     const UserComputer = async () => {
         try {
@@ -185,7 +201,10 @@ export const DropdownUsers = () =>{
                 params:data
             })
             setFetchComps(false)
-            setComp(sccmUsers.data)
+            const stringItem = JSON.stringify(sccmUsers.data)
+            console.log(stringItem)
+            setComp(sccmUsers.data['Computers'])
+            setUserObj(sccmUsers.data)
             
         } catch (error) {
             setFetchComps(false)
@@ -194,8 +213,11 @@ export const DropdownUsers = () =>{
     }
     
     useEffect(() => {
-        
-    },[userList])
+        if(prevUser !== user && user !== ''){
+            console.log(user)
+            UserComputer()
+        }
+    },[userList,user,prevUser])
 
     return (
         <div >
@@ -223,7 +245,7 @@ export const DropdownUsers = () =>{
     
   </div>
   </div>
-        <button onClick={() => UserComputer()}>Get Computers</button>
+        
         </div>
   
   
@@ -231,6 +253,7 @@ export const DropdownUsers = () =>{
     </div>
             </div>
         
+        <ManagementItems props={userObj}></ManagementItems>
         
         </div>
         
@@ -243,3 +266,16 @@ export const DropdownUsers = () =>{
     )
 }
 
+
+const ManagementItems = ({props}) => {
+ return (
+     <div className='colFlex'>
+         <div>
+          {props["SAP"]}
+         </div>
+         <div>
+          {props["Title"]}
+         </div>
+     </div>
+ )
+}

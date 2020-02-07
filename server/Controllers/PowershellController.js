@@ -166,11 +166,17 @@ const GetSccmUsers = async () => {
            
            
            ps.addCommand(`
-           function Get-Users {
+           
+
+$userDetails = Get-ADUser -Identity ${user} -Properties Manager,LockedOut,Title,passwordlastset,passwordneverexpires,SAPuID1
+
+function Get-Users {
             param (
                 [Parameter(Mandatory = $true)] 
                 [string] $user
             )
+
+
             
             $Computers=(Get-WmiObject -namespace ${namespace} -query "SELECT SMS_R_System.Name FROM SMS_R_SYSTEM WHERE LastLogonUserName='$user'" -computer "syd1scm01.ce.corp" )
                     foreach ($computer in $computers) {
@@ -182,30 +188,47 @@ const GetSccmUsers = async () => {
                      if($loggedOnUser){
                         $compName
                      }
-                     
+           
                     
-                        }
+                    }
             }
             
+            
+            $manager = $userDetails.Manager
+            $sapId = $userDetails.SAPuID1
+            $title = $userDetails.Title
 
-            $userComps = Get-users -user ${user}
-            $userComps
+           
+
+            $userComps = Get-users -user chris.younan
+         
+            
+             $ourObject = [PSCustomObject]@{
+            Manager = $manager
+            SAP = $sapId
+            Title = $title
+            Computers = $userComps
+            } | ConvertTo-Json
+            
+
+          $ourObject
+            
+
          
            `);
            
            ps.invoke().then(output => {
                
-                
-            const computers = output.split('\n').filter(e => {
-               return e !== ''
-            });
             
             
             
             
-            res.status(200).send(computers)
+            
+            
+            
+            res.status(200).send(output)
          }).catch(error => {
-            
+            console.log(error)
             res.status(422).send(error)
          }); 
 

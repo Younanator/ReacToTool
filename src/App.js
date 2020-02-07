@@ -17,7 +17,7 @@ function App() {
       <Navbar></Navbar>
          
      
-      <div style={{display:'flex',margin:'auto',width:'20%',backgroundColor:'#8e8eda',justifyContent:'center'}}>
+      <div style={{display:'flex',margin:'auto',width:'28%',backgroundColor:'#8e8eda',justifyContent:'center',borderRadius:'5px',color:'white'}}>
       <Username></Username>
       </div>
       
