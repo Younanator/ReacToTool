@@ -201,7 +201,7 @@ function Get-Users {
 
            
 
-            $userComps = Get-users -user chris.younan
+            $userComps = Get-users -user ${user}
          
             
              $ourObject = [PSCustomObject]@{
