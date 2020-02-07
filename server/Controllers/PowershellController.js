@@ -197,6 +197,7 @@ function Get-Users {
             $manager = $userDetails.Manager
             $sapId = $userDetails.SAPuID1
             $title = $userDetails.Title
+            $locked = $userDetails.lockedOut
 
            
 
@@ -208,6 +209,7 @@ function Get-Users {
             SAP = $sapId
             Title = $title
             Computers = $userComps
+            Locked = $locked
             } | ConvertTo-Json
             
 

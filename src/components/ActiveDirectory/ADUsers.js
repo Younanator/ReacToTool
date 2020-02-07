@@ -73,7 +73,7 @@ export const DropdownUsers = () =>{
     const UnlockUser = async () => {
         try {
             
-            toast('Unlocking...',{type:"success"})
+            toast('Unlocking...',{type:"info"})
             const users = await Axios.get(`${urlHeader}/UnlockAD`,{
                 params: {
                   user:samAcc
@@ -153,6 +153,7 @@ export const DropdownUsers = () =>{
     const [userObj,setUserObj] = useState({})
     
     
+    
     const RDPSess = async () => {
         try {
             
@@ -205,6 +206,7 @@ export const DropdownUsers = () =>{
             console.log(stringItem)
             setComp(sccmUsers.data['Computers'])
             setUserObj(sccmUsers.data)
+            
             
         } catch (error) {
             setFetchComps(false)
@@ -270,6 +272,9 @@ export const DropdownUsers = () =>{
 const ManagementItems = ({props}) => {
  return (
      <div className='colFlex'>
+         <div>
+          {props["Locked"] ? <p style={{backgroundColor:'red'}}>Locked</p> : 'Not locked'}
+         </div>
          <div>
           {props["SAP"]}
          </div>
