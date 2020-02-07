@@ -1,12 +1,16 @@
+const Shell = require('node-powershell');
 
-
-module.exports = (app,ps) => {
+module.exports = (app) => {
 
     
 
     const index = async () => {
         app.get("/api/Adobe",  function(req, res) {
-    
+            const ps = new Shell({
+                verbose:true,
+                  executionPolicy: 'Bypass',
+                  noProfile: true,
+                });
             const {user} = req.query
            
             const docPath =`C:\\Users\\${user}\\Documents\\users.csv`.replace(/\\/g,'/')
@@ -52,8 +56,9 @@ $user.email
                  `);
                  
                  ps.invoke().then(output => {
+                     ps.dispose()
                      const users = output.split("\n")
-
+                      
                     res.status(200).send(users)
                  }).catch(error => {
                      console.log(error)

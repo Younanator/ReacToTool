@@ -18,9 +18,9 @@ const ps = new Shell({
   });
 
 
-const AdobeController = require('./Controllers/AdobeController')(app,ps)
+const AdobeController = require('./Controllers/AdobeController')(app)
 const PrinterController = require('./Controllers/PrinterController')(app,ps)
-const PowershellController = require('./Controllers/PowershellController')(app,ps)
+const PowershellController = require('./Controllers/PowershellController')(app)
 
 AdobeController.index();
 //

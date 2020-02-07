@@ -1,15 +1,21 @@
 const { exec } = require('child_process');
 const ip = require('ip');
+const Shell = require('node-powershell');
 
 
 
 
 
-
-module.exports = (app,ps) => {
+module.exports = (app) => {
 
     const index = async () => {
+      
         app.get("/api/GetUsers",  function(req, res) {
+         const ps = new Shell({
+            verbose:true,
+              executionPolicy: 'Bypass',
+              noProfile: true,
+            });
                  ps.addCommand(`
                  $users = Get-ADUser  -Filter * -SearchBase "OU=Class 1 Standard Users,OU=User Accounts,DC=CE,DC=CORP"
                  $edexusers = Get-ADUser  -Filter * -SearchBase "OU=Class 6 Edex Users,OU=User Accounts,DC=CE,DC=CORP"
@@ -22,7 +28,7 @@ module.exports = (app,ps) => {
                  }`);
                  
                  ps.invoke().then(output => {
-                     
+                     ps.dispose()
                      const users = output.split("\n")
 
                     res.status(200).send(users)
@@ -35,7 +41,13 @@ module.exports = (app,ps) => {
 
 
 const unlockUser = async () => {
+   
     app.get("/api/UnlockAD",  function(req, res) {
+      const ps = new Shell({
+         verbose:true,
+           executionPolicy: 'Bypass',
+           noProfile: true,
+         });
 
         const {user} = req.query;
            
@@ -59,7 +71,7 @@ const unlockUser = async () => {
              
              ps.invoke().then(output => {
                  
-                
+                ps.dispose()
                 res.status(200).send(output)
              }).catch(error => {
                 console.log('err')
@@ -71,8 +83,13 @@ const unlockUser = async () => {
 
 
 const getAllUsers = async () => {
+   
     app.get("/api/AllUsers",  function(req, res) {
-
+      const ps = new Shell({
+         verbose:true,
+           executionPolicy: 'Bypass',
+           noProfile: true,
+         });
         
            
               ps.addCommand(`
@@ -93,6 +110,7 @@ const getAllUsers = async () => {
               `);
              
              ps.invoke().then(output => {
+                ps.dispose()
                  let users = []
                  const list = output.split('\n')
                  
@@ -116,7 +134,13 @@ const getAllUsers = async () => {
   
 
 const RDPSccm = async () => {
+   
     app.get("/api/RDP",  function(req, res) {
+      const ps = new Shell({
+         verbose:true,
+           executionPolicy: 'Bypass',
+           noProfile: true,
+         });
 
         const {computer} = req.query;
            
@@ -126,7 +150,7 @@ const RDPSccm = async () => {
               `);
              
              ps.invoke().then(output => {
-                
+                ps.dispose()
                 
                 res.status(200).send(`Connected to ${computer}`)
              }).catch(error => {
@@ -138,7 +162,11 @@ const RDPSccm = async () => {
 
 const RemoteSccm = async () => {
     app.get("/api/Remote",  function(req, res) {
-
+      const ps = new Shell({
+         verbose:true,
+           executionPolicy: 'Bypass',
+           noProfile: true,
+         });
         const {computer} = req.query;
            
               ps.addCommand(`
@@ -147,7 +175,7 @@ const RemoteSccm = async () => {
               `);
              
              ps.invoke().then(output => {
-                
+                ps.dispose()
                 
                 res.status(200).send(`Remoted to ${computer}`)
              }).catch(error => {
@@ -162,7 +190,11 @@ const RemoteSccm = async () => {
 
 const GetSccmUsers = async () => {
     app.get("/api/SccmUsers",  function(req, res) {
-
+      const ps = new Shell({
+         verbose:true,
+           executionPolicy: 'Bypass',
+           noProfile: true,
+         });
            const {user} = req.query;
            const namespace =`root\\sms\\site_STP`.replace(/\\/g,'/')
 
@@ -225,7 +257,7 @@ function Get-Users {
            ps.invoke().then(output => {
                
             
-            console.log(ip.address()) // my ip address
+            ps.dispose()
             
             
             
