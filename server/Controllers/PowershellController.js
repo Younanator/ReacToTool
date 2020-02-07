@@ -1,4 +1,7 @@
 const { exec } = require('child_process');
+const ip = require('ip');
+
+
 
 
 
@@ -222,7 +225,7 @@ function Get-Users {
            ps.invoke().then(output => {
                
             
-            
+            console.log(ip.address()) // my ip address
             
             
             
@@ -244,6 +247,8 @@ const openLink = () => {
    app.get("/api/Link",  function(req, res) {
       
       const {app,link} = req.query;
+
+      console.log(req.hostname)
       
       exec(`start "" ${app} ${link}`)
       

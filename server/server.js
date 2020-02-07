@@ -3,13 +3,13 @@ const express = require('express');
 const port = process.env.PORT || 5000;
 const path = require("path");
 const Shell = require('node-powershell');
-
-
 const cors = require('cors')
-
 const app = express();
-app.use(cors({origin: 'http://localhost:3000',credentials:true,allowedHeaders:['Origin']}));
+const blockReqs = require('./middleware')
 
+app.set('trust proxy', true)
+app.use(cors({origin: 'http://localhost:3000',credentials:true,allowedHeaders:['Origin']}));
+app.use(blockReqs.blockReqs)
 
 const ps = new Shell({
   verbose:true,
