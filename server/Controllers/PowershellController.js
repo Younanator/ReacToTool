@@ -280,7 +280,7 @@ const openLink = async () => {
       
       const {app,link} = req.query;
 
-      console.log(req.hostname)
+      if(link === undefined) link = null
       
       exec(`start "" ${app} ${link}`)
       
@@ -299,10 +299,8 @@ const getSecurityGroups = async () => {
           executionPolicy: 'Bypass',
           noProfile: true,
         });
-          const {path} = req.query;
-          
 
-          
+          const {path} = req.query;
           
           ps.addCommand(`
               
