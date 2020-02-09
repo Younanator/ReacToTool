@@ -33,6 +33,8 @@ PowershellController.RDPSccm();
 PowershellController.RemoteSccm();
 PowershellController.GetSccmUsers();
 PowershellController.openLink();
+PowershellController.getSecurityGroups();
+PowershellController.AddUserToFGroup();
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));

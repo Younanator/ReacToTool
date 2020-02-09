@@ -275,7 +275,7 @@ function Get-Users {
 
 }
 
-const openLink = () => {
+const openLink = async () => {
    app.get("/api/Link",  function(req, res) {
       
       const {app,link} = req.query;
@@ -292,6 +292,91 @@ const openLink = () => {
 }
 
 
+const getSecurityGroups = async () => {
+   app.get("/api/FilePermissions",  function(req, res) {
+     const ps = new Shell({
+        verbose:true,
+          executionPolicy: 'Bypass',
+          noProfile: true,
+        });
+          const {path} = req.query;
+          
+
+          
+          
+          ps.addCommand(`
+              
+          $item = Get-Acl -Path  ${path} | ForEach-Object { $_.Access  }
+          
+          $item.IdentityReference.value
+
+
+          `);
+          
+          ps.invoke().then(output => {
+              
+            const data = output.split('\n')
+           
+           ps.dispose()
+           
+         
+           
+           
+           
+           res.status(200).send(data)
+        }).catch(error => {
+           console.log(error)
+           res.status(422).send(error)
+        }); 
+
+          
+        
+     });  
+
+}
+
+
+const AddUserToFGroup = async () => {
+   app.get("/api/AddUserToFGroup",  function(req, res) {
+     const ps = new Shell({
+        verbose:true,
+          executionPolicy: 'Bypass',
+          noProfile: true,
+        });
+          const {user,group} = req.query;
+          
+
+          
+          
+          ps.addCommand(`
+              
+          $user = Add-ADGroupMember -Identity ${group} -Members ${user}
+          $user
+
+          `);
+          
+          ps.invoke().then(output => {
+              
+         const data = output.split(',')
+           
+         ps.dispose()
+           
+         
+           
+           
+           
+           res.status(200).send(data)
+        }).catch(error => {
+           console.log(error)
+           res.status(422).send(error)
+        }); 
+
+          
+        
+     });  
+
+}
+
     return Object.create({
         index,
         unlockUser,
@@ -299,7 +384,10 @@ const openLink = () => {
         RDPSccm,
         RemoteSccm,
         GetSccmUsers,
-        openLink
+        openLink,
+        getSecurityGroups,
+        AddUserToFGroup
+
         // ...
     })
 }

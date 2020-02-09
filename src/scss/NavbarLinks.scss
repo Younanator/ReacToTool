@@ -1,0 +1,58 @@
+
+.nav-links{
+    
+    * {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    
+    
+    ul{
+        display: flex;
+        width: 100%;
+        max-width: 1000px;
+        justify-content: space-between;
+        text-align: center;
+        font-weight: bold;
+    }
+    li {
+      text-transform: uppercase;
+      cursor: pointer;
+      color: #9e98bd;
+        min-width: 80px;
+        margin: auto;
+    }
+    
+    li:hover {
+      background-size: 100% 100%;
+      color: #9e98bd;
+      animation: spring 300ms ease-out;
+      text-shadow: 0 -2px 0 #9398e4;
+        font-weight: bold;
+        
+    }
+    li:active {
+      transform: translateY(4px);
+    }
+    
+    @keyframes spring {
+      15% {
+        -webkit-transform-origin: center center;
+        -webkit-transform: scale(1.2, 1.1);
+      }
+      40% {
+        -webkit-transform-origin: center center;
+        -webkit-transform: scale(0.95, 0.95);
+      }
+      75% {
+        -webkit-transform-origin: center center;
+        -webkit-transform: scale(1.05, 1);
+      }
+      100% {
+        -webkit-transform-origin: center center;
+        -webkit-transform: scale(1, 1);
+      }
+    }
+}
+

@@ -4,7 +4,6 @@ import Axios from 'axios'
 import {urlHeader} from '../config/config'
 import {  Link,withRouter } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
-import '../scss/ToggleMenu.scss'
 
 export const ToggleMenu = () => {
     return(

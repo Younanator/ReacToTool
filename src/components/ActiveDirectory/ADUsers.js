@@ -60,7 +60,7 @@ export const ADUser = () => {
 export const DropdownUsers = () => {
 
     const userList = useSelector(state => state.ActiveDirectory.users)
-    const dispatch = useDispatch();
+    
     const [user, setUser] = useState('')
     const [samAcc, setSam] = useState('')
     const prevUser = usePrevious(samAcc)
@@ -100,30 +100,7 @@ export const DropdownUsers = () => {
         }
     }
 
-    const getUsers = () => dispatch => {
-
-        toast('Grabbing AD Users', { type: 'info' })
-        Axios.get(`${urlHeader}/AllUsers`).then(resp => {
-            dispatch({ type: 'GET_USERS', payload: resp.data })
-            toast('Got All AD Users', { type: 'success' })
-
-        }, err => {
-            toast('Failed to grab users', { type: 'error' })
-
-        })
-
-    }
-
-
-
-
-
-    useEffect(() => {
-        if (userList.length === 0) {
-            dispatch(getUsers())
-        }
-
-    }, [userList, dispatch])
+    
 
     return (
         <div style={{ fontSize: '0.75rem',zIndex:1 }}>
