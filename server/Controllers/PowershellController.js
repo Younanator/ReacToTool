@@ -279,8 +279,6 @@ const openLink = async () => {
    app.get("/api/Link",  function(req, res) {
       
       const {app,link} = req.query;
-
-      if(link === undefined) link = null
       
       exec(`start "" ${app} ${link}`)
       
