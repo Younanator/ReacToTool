@@ -35,6 +35,7 @@ PowershellController.GetSccmUsers();
 PowershellController.openLink();
 PowershellController.getSecurityGroups();
 PowershellController.AddUserToFGroup();
+PowershellController.sendRemoteMessage();
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));

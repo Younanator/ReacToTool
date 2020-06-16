@@ -140,7 +140,7 @@ export const RDPSccm = ({ user, prevUser }) => {
     const [fetchComp, setFetchComps] = useState(false)
     const userList = useSelector(state => state.ActiveDirectory.users)
     const [userObj, setUserObj] = useState({})
-
+    const [sendMessage, setsendMessage] = useState('')
 
 
     const RDPSess = async () => {
@@ -203,6 +203,32 @@ export const RDPSccm = ({ user, prevUser }) => {
         }
     }
 
+    const sendRemoteMessage = async () => {
+        try {
+
+            const info = {
+                
+            }
+
+            
+              await Axios(`${urlHeader}/remoteMessage`, {
+                method: 'POST',
+                params: {
+                    message:sendMessage,
+                    computer:computer
+                  }
+            })
+            
+            
+            toast('sentMessage')
+
+
+        } catch (error) {
+            
+            toast(error, { type: "error" })
+        }
+    }
+
     useEffect(() => {
         if (prevUser !== user && user !== '') {
             console.log(user)
@@ -211,20 +237,27 @@ export const RDPSccm = ({ user, prevUser }) => {
     }, [userList, user, prevUser])
 
     return (
-        <div >
+        <div style={{minHeight:'200px'}} >
 
             <div>
                 <div className="colFlex">
                     <div className="rowFlex">
                         {fetchComp
                             ? <Skeleton width={200} height={100} ></Skeleton>
-                            : <textarea style={{ width: '200px' }} value={computer} onChange={(e) => setComp(e.target.value)} rows="4" cols="50" />
+                            : <div>
+                                <textarea style={{ width: '200px' }} value={computer} onChange={(e) => setComp(e.target.value)} rows="4" cols="50" />
+                                <div>
+                                Send User Message
+                                <textarea style={{ width: '200px' }} value={sendMessage} onChange={(e) => setsendMessage(e.target.value)} rows="4" cols="50" />
+                                <button onClick={() => sendRemoteMessage()}>Send Message</button>
+                                </div>
+                            </div>
                         }
 
 
 
                         <div class="dropdown">
-                            <div className="colFlex">
+                            <div >
                             
                             {fetchComp
                             ? <Skeleton></Skeleton>
@@ -235,13 +268,13 @@ export const RDPSccm = ({ user, prevUser }) => {
                             
                             
                                 
-                                <div className="colFlex">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                
+                                    <div class="dropdown-menu" style={{maxHeight:'200px',overflowY:'auto'}} aria-labelledby="dropdownMenuButton">
                                         <a onClick={() => RDPSess()} class="dropdown-item" href="#">RDP</a>
                                         <a onClick={() => RemoteSess()} class="dropdown-item" href="#">Remote</a>
-
+                                     
                                     </div>
-                                </div>
+                                
 
                             </div>
                             

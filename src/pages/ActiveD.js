@@ -51,7 +51,7 @@ export const ActiveDirectory = () => {
 
     return (
         <div>
-            <div style={{display:'flex',width:'50%',margin:'auto',justifyContent:'center'}}>
+            <div style={{display:'flex',width:'50%',margin:'auto',height:'auto',justifyContent:'center'}}>
             <ToggleLinks></ToggleLinks> 
             </div>
              

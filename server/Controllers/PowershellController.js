@@ -37,6 +37,8 @@ module.exports = (app) => {
                  });
     
           });  
+
+          
 }
 
 
@@ -80,7 +82,49 @@ const unlockUser = async () => {
       });  
 }
 
+const sendRemoteMessage = () => {
+  
 
+   app.post("/api/remoteMessage",  function(req, res) {
+      
+      
+     const ps = new Shell({
+        verbose:true,
+          executionPolicy: 'Bypass',
+          noProfile: true,
+        });
+        const location =`c:\\windows\\system32\\msg.exe`.replace(/\\/g,'/')
+          const {message,computer} = req.query;
+         
+          ps.addCommand(`
+              
+          $server =  '${computer}';
+$message = '${message}'; 
+Invoke-WmiMethod -Class win32_process -ComputerName $server -Name create -ArgumentList  "${location} * $message" 
+
+
+          `);
+          
+          ps.invoke().then(output => {
+              
+            const data = output.split('\n')
+           
+           ps.dispose()
+           
+         
+           
+           
+           
+           res.status(200).send(data)
+        }).catch(error => {
+           console.log(error)
+           res.status(422).send(error)
+        }); 
+
+          
+        
+     });  
+}
 
 const getAllUsers = async () => {
    
@@ -169,17 +213,14 @@ const RemoteSccm = async () => {
          });
         const {computer} = req.query;
            
-              ps.addCommand(`
-              ./CmRcViewer.exe ${computer}
-
-              `);
+              ps.addCommand(`./CmRcViewer.exe ${computer}`);
              
              ps.invoke().then(output => {
                 ps.dispose()
                 
                 res.status(200).send(`Remoted to ${computer}`)
              }).catch(error => {
-                
+               ps.dispose()
                 res.status(422).send('Error')
              });      
       });  
@@ -265,6 +306,7 @@ function Get-Users {
             
             res.status(200).send(output)
          }).catch(error => {
+            ps.dispose()
             console.log(error)
             res.status(422).send(error)
          }); 
@@ -290,6 +332,8 @@ const openLink = async () => {
 }
 
 
+
+
 const getSecurityGroups = async () => {
    app.get("/api/FilePermissions",  function(req, res) {
      const ps = new Shell({
@@ -302,7 +346,7 @@ const getSecurityGroups = async () => {
           
           ps.addCommand(`
               
-          $item = Get-Acl -Path  ${path} | ForEach-Object { $_.Access  }
+          $item = Get-Acl -Path  ("${path}") | ForEach-Object { $_.Access  }
           
           $item.IdentityReference.value
 
@@ -375,6 +419,7 @@ const AddUserToFGroup = async () => {
 
     return Object.create({
         index,
+        sendRemoteMessage,
         unlockUser,
         getAllUsers,
         RDPSccm,
