@@ -10,7 +10,7 @@
     "url": "https://your-website.com"
   },
   "build": {
-    "appId": "com.my-website.my-app",
+    "appId": "WincTool",
     "productName": "WincTool",
     "copyright": "Copyright © 2019 ${author}",
     "mac": {
@@ -51,7 +51,8 @@
     "react-toastify": "^5.5.0",
     "react-uuid": "^1.0.2",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "node-notifier": "7.1.0"
   },
   "scripts": {
     "start": "rescripts start",

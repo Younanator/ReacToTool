@@ -6,11 +6,12 @@ const Shell = require('node-powershell');
 const cors = require('cors')
 const app = express();
 const blockReqs = require('./middleware')
+const notifier = require('node-notifier');
 let listening = false
-
 app.set('trust proxy', true)
 app.use(cors({origin: 'http://localhost:3000',credentials:true,allowedHeaders:['Origin']}));
 app.use(blockReqs.blockReqs)
+const appID = 'WincTool'
 
 const ps = new Shell({
   verbose:true,
@@ -38,15 +39,15 @@ PowershellController.getSecurityGroups();
 PowershellController.AddUserToFGroup();
 PowershellController.sendRemoteMessage();
 
-app.get("/api/Listening",  function(req, res) {
-        
-  res.status(200).send(` Port active on ${listening}`)
-})
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
   
-app.listen(port, () => {listening = true});
+app.listen(port, () => {notifier.notify({
+title:'Port',
+message:`Running on port ${port}`,
+appID:appID
+})});
 
 module.exports = app

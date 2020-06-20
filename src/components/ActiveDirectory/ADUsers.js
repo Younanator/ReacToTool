@@ -257,11 +257,13 @@ export const RDPSccm = ({ user, prevUser }) => {
 
 
                         <div class="dropdown" >
-                            <div className="rowFlex"  >
+                            
                             
                             {fetchComp
                             ? <Skeleton></Skeleton>
-                            : <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            : <button  class="btn btn-secondary dropdown-toggle" 
+                            type="button" id="dropdownMenuButton" data-toggle="dropdown" 
+                            aria-haspopup="true" aria-expanded="false">
                             Connect
                              </button> 
                         }
@@ -276,7 +278,7 @@ export const RDPSccm = ({ user, prevUser }) => {
                                     </div>
                                 
 
-                            </div>
+                        
                             
                             <div>
                             <ManagementItems props={userObj}></ManagementItems>
