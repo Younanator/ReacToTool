@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,10 +8,18 @@ import { Username } from './components/User';
 import Routes from './routes/routes';
 import {Provider} from 'react-redux'
 import {store} from './redux/store'
+import Skeleton from 'react-loading-skeleton';
 
 function App() {
+  const [loading, setloading] = useState(true)
+  
+  useEffect(() => {
+    
+    setloading(false)
+  }, [])
   return (
-    <Provider store={store}>
+    !loading 
+    ? <Provider store={store}>
     <BrowserRouter>
     <div style={{display:'flex',flexDirection:'column',overflow:'hidden'}}>
       <Navbar></Navbar>
@@ -29,6 +37,11 @@ function App() {
     </div>
     </BrowserRouter>
     </Provider>
+  : 
+  <div>
+    <Skeleton height={200} width ={150}></Skeleton>
+  </div>
+  
   );
 }
 

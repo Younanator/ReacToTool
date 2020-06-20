@@ -6,6 +6,7 @@ const Shell = require('node-powershell');
 const cors = require('cors')
 const app = express();
 const blockReqs = require('./middleware')
+let listening = false
 
 app.set('trust proxy', true)
 app.use(cors({origin: 'http://localhost:3000',credentials:true,allowedHeaders:['Origin']}));
@@ -37,8 +38,15 @@ PowershellController.getSecurityGroups();
 PowershellController.AddUserToFGroup();
 PowershellController.sendRemoteMessage();
 
+app.get("/api/Listening",  function(req, res) {
+        
+  res.status(200).send(` Port active on ${listening}`)
+})
+
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
   
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => {listening = true});
+
+module.exports = app

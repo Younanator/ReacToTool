@@ -162,16 +162,16 @@ export const RDPSccm = ({ user, prevUser }) => {
     const RemoteSess = async () => {
         try {
 
-            const data = await Axios.get(`${urlHeader}/Remote`, {
+             await Axios.get(`${urlHeader}/Remote`, {
                 params: {
                     computer
                 }
             })
-
-            setResp(data.data)
+           
+            toast(`Connected to ${computer}`)
 
         } catch (error) {
-            toast()
+            toast('Error connecting to computer')
         }
     }
 
@@ -256,12 +256,12 @@ export const RDPSccm = ({ user, prevUser }) => {
 
 
 
-                        <div class="dropdown">
-                            <div >
+                        <div class="dropdown" >
+                            <div className="rowFlex"  >
                             
                             {fetchComp
                             ? <Skeleton></Skeleton>
-                            : <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            : <button  class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Connect
                              </button> 
                         }

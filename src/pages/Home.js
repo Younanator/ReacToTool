@@ -6,6 +6,9 @@ import {urlHeader} from '../config/config'
 import { ToggleMenu } from '../components/ToggleMenu';
 
 export const Home = () => {
+
+    const [port, setport] = useState('')
+
     const links = [
         {link:"https://serviceit.winc.com.au/helpdesk/tickets",name:'ServiceIT'},
         {link:"https://adminconsole.adobe.com/enterprise",name:'Adobe Admin'},
@@ -30,6 +33,17 @@ const adminLinks = [
 ]
 
 
+const getPort = async () => {
+    try {
+        const port = await Axios.get(`${urlHeader}/Listening`)
+        setport(port.data)
+    } catch (error) {
+        console.log(error)
+        setport('Error')
+    }
+}
+
+
 const openLink = async (app,link,name) => {
 
     await Axios.get(`${urlHeader}/Link`,{
@@ -42,9 +56,14 @@ const openLink = async (app,link,name) => {
     toast(`Opened ${name}`,{type:'success'})
     
 }
+
+useEffect(() => {
+    getPort()
+}, [])
     return (
         <div className="rowFlex">
             <ToggleMenu></ToggleMenu>
+            {port}
             <div className="wincLinks">
             {links.map(e => {
                 return(

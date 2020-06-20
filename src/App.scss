@@ -121,11 +121,14 @@
 .rowFlex{
   display:flex;
   flex-direction:row;
+  justify-content: flex-start;
+ 
 }
 
 .colFlex{
   display:flex;
   flex-direction:column;
+  
 }
 
 .wincLinks{
