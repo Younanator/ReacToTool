@@ -7,6 +7,7 @@ import { ActiveDirectory } from '../pages/ActiveD';
 import { AdobePage } from '../pages/Adobe';
 import { Trees } from '../pages/Trees';
 import { Home } from '../pages/Home';
+import { Scanner } from '../pages/Scanner';
 
 export default () => (
     
@@ -15,6 +16,7 @@ export default () => (
                 <Route exact path="/Active" component={ActiveDirectory} />
                 <Route exact path="/Adobe" component={AdobePage} />
                 <Route exact path="/Tree" component={Trees} />
+                <Route exact path="/Scanner" component={Scanner} />
                 <Route  path="/" component={Home} />
 
             </Switch>

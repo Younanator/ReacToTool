@@ -4,6 +4,7 @@ import Axios from 'axios'
 import { toast } from 'react-toastify';
 import {urlHeader} from '../config/config'
 import { ToggleMenu } from '../components/ToggleMenu';
+import {  Link,withRouter } from 'react-router-dom';
 
 export const Home = () => {
 
@@ -50,6 +51,8 @@ const openLink = async (app,link,name) => {
     return (
         <div className="rowFlex">
             <ToggleMenu></ToggleMenu>
+            
+            <Link to="/Scanner">Scanner</Link>
             
             <div className="wincLinks">
             {links.map(e => {

@@ -44,10 +44,6 @@ app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
   
-app.listen(port, () => {notifier.notify({
-title:'Port',
-message:`Running on port ${port}`,
-appID:appID
-})});
+app.listen(port, () => console.log('Running'));
 
 module.exports = app

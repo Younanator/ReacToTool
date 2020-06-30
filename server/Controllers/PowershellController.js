@@ -33,6 +33,7 @@ module.exports = (app) => {
 
                     res.status(200).send(users)
                  }).catch(error => {
+                    ps.dispose()
                     res.status(422).send(error)
                  });
     
@@ -76,6 +77,7 @@ const unlockUser = async () => {
                 ps.dispose()
                 res.status(200).send(output)
              }).catch(error => {
+                ps.dispose()
                 console.log('err')
                 res.status(422).send(error.toString())
              });      
@@ -117,6 +119,7 @@ Invoke-WmiMethod -Class win32_process -ComputerName $server -Name create -Argume
            
            res.status(200).send(data)
         }).catch(error => {
+           ps.dispose()
            console.log(error)
            res.status(422).send(error)
         }); 
@@ -169,8 +172,9 @@ const getAllUsers = async () => {
                 
                 res.status(200).send(users)
              }).catch(error => {
+                ps.dispose()
                 console.log('err')
-                res.status(422).send('Error')
+                res.status(422).send(error)
              });      
       });  
 }
@@ -198,7 +202,7 @@ const RDPSccm = async () => {
                 
                 res.status(200).send(`Connected to ${computer}`)
              }).catch(error => {
-                
+                ps.dispose()
                 res.status(422).send('Error')
              });      
       });  
@@ -221,7 +225,7 @@ const RemoteSccm = async () => {
                 res.status(200).send(`Remoted to ${computer}`)
              }).catch(error => {
                ps.dispose()
-                res.status(422).send('Error')
+                res.status(422).send(error)
              });      
       });  
 
@@ -365,6 +369,7 @@ const getSecurityGroups = async () => {
            
            res.status(200).send(data)
         }).catch(error => {
+           ps.dispose()
            console.log(error)
            res.status(422).send(error)
         }); 
@@ -408,6 +413,7 @@ const AddUserToFGroup = async () => {
            res.status(200).send(data)
         }).catch(error => {
            console.log(error)
+           ps.dispose()
            res.status(422).send(error)
         }); 
 

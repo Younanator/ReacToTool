@@ -43,7 +43,7 @@ const FileItem = ({ name,group,user,samAcc }) => {
   }
 
   return (
-    <div className="rowFlex">
+    <div className="rowFlex" >
       <div>{name}</div>
       <button onClick={() => addUser()}>Add to Group</button>
     </div>
@@ -69,7 +69,7 @@ const FetchFilePermissions = ({ path }) => {
     }
   }
   return (
-    <div>
+    <div style={{minWidth:'200px'}}>
     <button onClick={() => getFilePermiss(path)}>Get File Permissions</button>
     {filePerm.length !== 0 ? <AddUserToADGroup groups={filePerm}></AddUserToADGroup>: null}
     </div>

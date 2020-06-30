@@ -172,6 +172,7 @@ export const RDPSccm = ({ user, prevUser }) => {
 
         } catch (error) {
             toast('Error connecting to computer')
+            console.log(error)
         }
     }
 
@@ -261,25 +262,18 @@ export const RDPSccm = ({ user, prevUser }) => {
                             
                             {fetchComp
                             ? <Skeleton></Skeleton>
-                            : <button  class="btn btn-secondary dropdown-toggle" 
-                            type="button" id="dropdownMenuButton" data-toggle="dropdown" 
-                            aria-haspopup="true" aria-expanded="false">
-                            Connect
-                             </button> 
-                        }
-                            
-                            
-                                
-                                
-                                    <div class="dropdown-menu" style={{maxHeight:'200px',overflowY:'auto'}} aria-labelledby="dropdownMenuButton">
+                            : <div> 
+                             <div class="dropdown-menu1" style={{minWidth:'100px'}} aria-labelledby="dropdownMenuButton">
                                         <a onClick={() => RDPSess()} class="dropdown-item" href="#">RDP</a>
                                         <a onClick={() => RemoteSess()} class="dropdown-item" href="#">Remote</a>
                                      
-                                    </div>
-                                
+                            </div>
 
-                        
+                                
+                            </div>
+                        }
                             
+                        
                             <div>
                             <ManagementItems props={userObj}></ManagementItems>
                             </div>
