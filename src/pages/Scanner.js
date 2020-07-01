@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import QrReader from 'react-qr-scanner'
 import BarcodeReader from 'react-barcode-reader'
 import BarcodeScannerComponent from '../components/BarcodeScanner';
+import "../scss/Scanner.scss"
 
 let items = []
 
@@ -12,23 +13,22 @@ export const Scanner = () => {
     const [list,setList] = useState([])
     const [prevItem,setPrev] = useState('')
    
-    const updateItem = async (data) => {
-        await setList(data)
-    }
+    
 
     useEffect(() => {
         if(data !== 'No Result Found'){
             console.log(data)
-            setPrev(data)
+            
             if(data !== prevItem){
                 items.push(data)
+                setPrev(data)
             }
            
         }
     },[data])
 
     return (
-        <div>
+        <div style={{display:'flex',flexDirection:'row'}}>
             <BarcodeScannerComponent
         width={500}
         height={500}
@@ -43,13 +43,16 @@ export const Scanner = () => {
        
         }}
       />
+      <div>
       {items.map((e,i) => {
           return (
-          <p key={i}>{e}</p>
+          <p className="scannerItems" key={i}>{e}</p>
           )
       })}
+      <button  type="button" class="btn btn-primary">Register Items</button>
+      </div>
       
-        </div>
+    </div>
     )
 
     
