@@ -1,5 +1,5 @@
-const ip = require('ip');
-var cmd=require('node-cmd');
+
+
 let ipName = null
 
 const blockReqs = (req,res,next) => {

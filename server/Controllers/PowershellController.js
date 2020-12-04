@@ -129,6 +129,12 @@ Invoke-WmiMethod -Class win32_process -ComputerName $server -Name create -Argume
      });  
 }
 
+/**
+ 
+Line 148 needs to be changed for your own AD OU
+
+**/
+
 const getAllUsers = async () => {
    
     app.get("/api/AllUsers",  function(req, res) {
@@ -232,6 +238,9 @@ const RemoteSccm = async () => {
 }
 
 
+/** 
+ Line 253 might require some changes for your SQL site - Although this should work
+*/
 
 const GetSccmUsers = async () => {
     app.get("/api/SccmUsers",  function(req, res) {

@@ -1,7 +1,13 @@
 import Tree from 'react-d3-tree';
 import React, { useState, useEffect } from 'react';
 
-
+/** 
+ * Used to create a node tree of any hosted servers and description
+ * Can be useful for helpdesk
+ * You can configure it via Axios so that 
+   it downloads the TreeData from the web async and then you can do the traversal
+ 
+*/
 export const TreeGraph = () => {
 
   
@@ -22,6 +28,7 @@ export const TreeGraph = () => {
             
             if (node.name === search) {            
                 setTemp(node)
+                return 0 
             }
 
             if (node.children) {

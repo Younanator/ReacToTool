@@ -2,6 +2,9 @@
 
 module.exports = (app,ps) => {
 
+    /** 
+     * Line 14 needs to be configured for your own AD site
+     * **/
     const index = async () => {
         app.get("/api/PrinterRemoval",  function(req, res) {
     

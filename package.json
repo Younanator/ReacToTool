@@ -5,9 +5,9 @@
   "main": "public/electron.js",
   "homepage": "./",
   "author": {
-    "name": "Your Name",
-    "email": "your.email@domain.com",
-    "url": "https://your-website.com"
+    "name": "Chris Younan",
+    "email": "cyounan96@gmail.com",
+    "url": "N/A"
   },
   "build": {
     "appId": "WincTool",

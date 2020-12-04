@@ -14,7 +14,6 @@ export const Scanner = () => {
     const [prevItem,setPrev] = useState('')
    
     
-
     useEffect(() => {
         if(data !== 'No Result Found'){
             console.log(data)
