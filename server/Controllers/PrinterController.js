@@ -3,7 +3,7 @@
 module.exports = (app,ps) => {
 
     /** 
-     * Line 14 needs to be configured for your own AD site
+     * Line 14 needs to be configured for your own AD site and wherever you see OU configs
      * **/
     const index = async () => {
         app.get("/api/PrinterRemoval",  function(req, res) {
