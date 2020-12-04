@@ -5,8 +5,8 @@
   "main": "public/electron.js",
   "homepage": "./",
   "author": {
-    "name": "Chris Younan",
-    "email": "cyounan96@gmail.com",
+    "name": "Younanator",
+    "email": "N/A",
     "url": "N/A"
   },
   "build": {
