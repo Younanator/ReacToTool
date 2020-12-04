@@ -27,6 +27,8 @@ export const Scanner = () => {
     },[data])
 
     return (
+        <div>
+            <p>The scanner allows you to scan barcodes using the webcam</p>
         <div style={{display:'flex',flexDirection:'row'}}>
             <BarcodeScannerComponent
         width={500}
@@ -43,14 +45,16 @@ export const Scanner = () => {
         }}
       />
       <div>
+      <button  type="button" style={{marginTop:'70px'}} class="btn btn-primary">Register Items</button>
       {items.map((e,i) => {
           return (
           <p className="scannerItems" key={i}>{e}</p>
           )
       })}
-      <button  type="button" class="btn btn-primary">Register Items</button>
+      
       </div>
       
+    </div>
     </div>
     )
 

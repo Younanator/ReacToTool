@@ -36,7 +36,7 @@ export const Username = () => {
      return (
          <div className="rowFlex">
         <p></p><input placeholder="Enter network username" onChange={(e) => setUser(e.target.value)}></input>
-        <button onClick={() => addUser()}>Set username</button>
+        <button class="btn btn-primary" onClick={() => addUser()}>Set username</button>
          </div>
     )
   }

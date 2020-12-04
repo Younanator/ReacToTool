@@ -1,5 +1,5 @@
 {
-  "name": "winc-service",
+  "name": "reactotool",
   "version": "0.1.0",
   "private": true,
   "main": "public/electron.js",
@@ -10,8 +10,8 @@
     "url": "N/A"
   },
   "build": {
-    "appId": "WincTool",
-    "productName": "WincTool",
+    "appId": "ReactoTool",
+    "productName": "ReactoTool",
     "copyright": "Copyright © 2019 ${author}",
     "mac": {
       "category": "public.app-category.utilities"
