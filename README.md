@@ -12,6 +12,7 @@ This project was created using Electron, React, Powershell and NodeJS.
 
 ## General Usage
    1. To make changes to the queries/controllers - go to the server/controllers folder. You may use that as a reference for future scripts and or functions in NodeJS. 
+    See youtube tutorials or program the front-end buttons, text, list ,etc yourself. Traversy Media is one place where you can learn to use React.
    2. Make sure to run the application as an Admin, make sure that your AD rights,SCCM,etc are configured properly as the App uses your account privileges.
    
 ## Production Usage
@@ -19,7 +20,7 @@ This project was created using Electron, React, Powershell and NodeJS.
 2. Execute - yarn prepack
 3. Execute - yarn epack 
 4. Go to directory where it has placed the installer and run the installer or copy it wherever you need
-5. Done
-
+5. You will need to place the content of the prodresources folder in the same directory to utilize RDP, etc. 
+6. Done
 You may use this tool, make edits and reconfigure the whole thing if you like.
 I'd appreciate if you acknowledge me however  =). 
