@@ -20,7 +20,7 @@ This project was created using Electron, React, Powershell and NodeJS.
 2. Execute - yarn prepack
 3. Execute - yarn epack 
 4. Go to directory where it has placed the installer and run the installer or copy it wherever you need
-5. You will need to place the content of the prodresources folder in the same directory to utilize RDP, etc. 
+5. You will need to place the content of the prodresources folder and place the 0000049 folder in the same directory to utilize RDP, etc. 
 6. Done
 You may use this tool, make edits and reconfigure the whole thing if you like.
 I'd appreciate if you acknowledge me however  =). 
