@@ -265,7 +265,7 @@ function Get-Users {
 
 
             
-            $Computers=(Get-WmiObject -namespace ${namespace} -query "SELECT SMS_R_System.Name FROM SMS_R_SYSTEM WHERE LastLogonUserName='$user'" -computer "syd1scm01.ce.corp" )
+            $Computers=(Get-WmiObject -namespace ${namespace} -query "SELECT SMS_R_System.Name FROM SMS_R_SYSTEM WHERE LastLogonUserName='$user'" -computer "{ENTER SCCM HOST SITE}" )
                     foreach ($computer in $computers) {
                                 
                      $compName = $computer.name
