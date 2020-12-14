@@ -30,7 +30,7 @@ export const ADUser = () => {
         } catch (error) {
             setSpinner(false)
             console.log(error)
-            setErr(error)
+            setErr('Error connecting to AD')
         }
     }
 
@@ -40,7 +40,7 @@ export const ADUser = () => {
 
     return (
         <div style={{ display: 'flex', wordBreak: 'break-word', flexDirection: 'row' }}>
-            <p style={{}} onClick={() => getDisabledUsers()}>Find 50 AD Users</p>
+            <button className="btn btn-primary"  onClick={() => getDisabledUsers()}>Find 50 AD Users</button>
 
             {spinner ? <div>Loading...</div> : null}
             <div style={{ display: 'flex', flexDirection: 'column' }}>

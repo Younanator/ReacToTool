@@ -14,8 +14,9 @@ export const FilePermissions = () => {
 
   return (
     <div>
-      <div >
-        <input value={fileName} onChange={(e) => setFName(e.target.value)}></input>
+
+      <div style={{display:'flex',flexDirection:'row'}}>
+        <input value={fileName} placeholder="Enter file path" onChange={(e) => setFName(e.target.value)}></input>
         <FetchFilePermissions path={fileName}></FetchFilePermissions>
       </div>
 
@@ -70,7 +71,7 @@ const FetchFilePermissions = ({ path }) => {
   }
   return (
     <div style={{minWidth:'200px'}}>
-    <button onClick={() => getFilePermiss(path)}>Get File Permissions</button>
+    <button className="btn btn-primary" onClick={() => getFilePermiss(path)}>Get File Permissions</button>
     {filePerm.length !== 0 ? <AddUserToADGroup groups={filePerm}></AddUserToADGroup>: null}
     </div>
   )

@@ -64,7 +64,7 @@ export const ActiveDirectory = () => {
                 }
                 {links === 'Active Directory' 
                 ? 
-                <div className="colFlex" style={{display:'flex',width:'auto',maxHeight:'300px',minWidth:'40%',maxWidth:'80%',margin:'auto',backgroundColor:'#b4b4f1'}}>
+                <div className="colFlex" style={{display:'flex',width:'auto',maxHeight:'300px',minWidth:'40%',maxWidth:'80%',margin:'auto'}}>
             <DropdownUsers></DropdownUsers>
            
             </div>
@@ -73,7 +73,7 @@ export const ActiveDirectory = () => {
                 }
                 {links === 'File' 
                 ? 
-                <div className="colFlex" style={{display:'flex',width:'auto',maxHeight:'300px',minWidth:'40%',maxWidth:'80%',margin:'auto',backgroundColor:'#b4b4f1'}}>
+                <div className="colFlex" style={{display:'flex',width:'auto',maxHeight:'300px',minWidth:'40%',maxWidth:'80%',margin:'auto'}}>
             <FilePermissions></FilePermissions>
            
             </div>
