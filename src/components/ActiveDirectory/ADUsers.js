@@ -22,16 +22,18 @@ export const ADUser = () => {
     const [spinner, setSpinner] = useState(false)
 
     const getDisabledUsers = async () => {
+        setSpinner(true)
         try {
-            setSpinner(true)
+           
             const users = await Axios.get(`${urlHeader}/GetUsers`)
             setOutput(users.data)
-            setSpinner(false)
+            
         } catch (error) {
-            setSpinner(false)
+            
             console.log(error)
             setErr('Error connecting to AD')
         }
+        setSpinner(false)
     }
 
     useEffect(() => {
