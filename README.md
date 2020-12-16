@@ -7,7 +7,7 @@ This project was created using Electron, React, Powershell and NodeJS.
 3. Install React 
 4. Clone repository
 6. Install in the folder repository using "yarn install" via cmd/terminal
-7. Run program using  - yarn edev
+7. Run program using  - yarn edev (Runs nodejs server concurrently with react script)
 8. See General usage for how to configure it for your own use
 
 ## General Usage
@@ -17,10 +17,14 @@ This project was created using Electron, React, Powershell and NodeJS.
    
 ## Production Usage
 1. You will need to move the server folder to the public folder - Copy paste it
-2. Execute - yarn prepack
-3. Execute - yarn epack 
-4. Go to directory where it has placed the installer and run the installer or copy it wherever you need
-5. You will need to place the content of the prodresources folder and place the 0000049 folder in the same directory to utilize RDP, etc. 
-6. Done
+2. In electron.js in the public folder, add the following
+```
+const reqServer = require('./server/server.js)
+```
+3. Execute - yarn prepack
+4. Execute - yarn epack 
+5. Go to directory where it has placed the installer and run the installer or copy it wherever you need
+6. You will need to place the content of the prodresources folder and place the 0000049 folder in the same directory to utilize RDP, etc. 
+7. Done
 You may use this tool, make edits and reconfigure the whole thing if you like.
 I'd appreciate if you acknowledge me however  =). 
