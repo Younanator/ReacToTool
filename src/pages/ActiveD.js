@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-uuid'
 import Axios from 'axios'
 import { PrinterRemoval } from '../components/ActiveDirectory/Printer';
-import { DropdownUsers,RDPSccm } from '../components/ActiveDirectory/ADUsers';
 import '../scss/ToggleMenu.scss'
 import '../scss/NavbarLinks.scss'
 import { FilePermissions } from '../components/ActiveDirectory/FilePermission/FilePermissions';
@@ -65,7 +64,7 @@ export const ActiveDirectory = () => {
                 {links === 'Active Directory' 
                 ? 
                 <div className="colFlex" style={{display:'flex',width:'auto',maxHeight:'300px',minWidth:'40%',maxWidth:'80%',margin:'auto'}}>
-            <DropdownUsers></DropdownUsers>
+            <p>Not yet implemented solution</p>
            
             </div>
                 :

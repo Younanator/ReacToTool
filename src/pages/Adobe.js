@@ -10,7 +10,8 @@ export const AdobePage = () => {
     return (
         <div>
             
-           <AdobeDisabled></AdobeDisabled>
+            <p style={{display:'flex',margin:'auto',width:'70%',fontWeight:'bold'}}> You may add your own API Calls or features here</p>
+           
         </div>
     )
 }

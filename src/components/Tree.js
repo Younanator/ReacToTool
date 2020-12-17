@@ -48,12 +48,15 @@ useEffect(() => {
         
         <div id="treeWrapper" style={{width: '40em', height: '40em'}}>
 
-<div className="rowFlex">
-             <input onChange={(e) => setSearch(e.target.value)}></input>
-             <p onClick = {() => dfs(myTreeData) }> Find Node</p>
+<div className="rowFlex" style={{margin:'auto',width:'80%'}}>
+
+  <input type="text" onChange={(e) => setSearch(e.target.value)} className="form-control" style={{display:'flex',width:'50%'}} />
+
+<button onClick = {() => dfs(myTreeData) }type="button" class="btn btn-primary">Find Node</button>
+
         </div>
         
-        <div className="rowFlex">
+        <div className="rowFlex" style={{marginTop:'20px'}}>
 
 
         <div style={{width:'800px',height:'400px'}}>

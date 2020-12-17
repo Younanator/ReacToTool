@@ -11,10 +11,7 @@ export const ToggleMenu = () => {
 <nav class="btn-pluss-wrapper">
  <div href="#" class="btn-pluss">
   <ul>
-    <li><a href="#about">About me</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">Configure</a></li>
   </ul>
  </div>
 </nav>

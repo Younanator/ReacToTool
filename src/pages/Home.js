@@ -47,26 +47,28 @@ const openLink = async (app,link,name) => {
         <div className="rowFlex">
             <ToggleMenu></ToggleMenu>
             
-            <Link to="/Scanner">Scanner</Link>
             
+            <div style={{margin:'auto',display:'flex',width:'150px',marginTop:'10px',marginLeft:'100px'}}>
             <div className="wincLinks">
+            <Link to="/Scanner" style={{outline:'none',color:'white',textDecoration:'none'}} className="normalLinks" >Scanner</Link>
             {links.map(e => {
                 return(
-                 <td 
-                onClick={()=> e.app !== undefined ? openLink(e.app,e.link,e.name) : window.open(e.link, e.name,3000)}>
-               {e.name}
-               </td>
-                )
-            })}
-            <h3>Admin Links</h3>
-            {adminLinks.map(e => {
-                return(
-                 <a
+                 <a className="normalLinks" style={{color:'white'}}
                 onClick={()=> e.app !== undefined ? openLink(e.app,e.link,e.name) : window.open(e.link, e.name,3000)}>
                {e.name}
                </a>
                 )
             })}
+           
+            {adminLinks.map(e => {
+                return(
+                 <a className="adminLinks"
+                onClick={()=> e.app !== undefined ? openLink(e.app,e.link,e.name) : window.open(e.link, e.name,3000)}>
+               {e.name}
+               </a>
+                )
+            })}
+            </div>
             </div>
            
            
