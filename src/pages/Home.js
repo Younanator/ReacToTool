@@ -10,9 +10,7 @@ import {  Link,withRouter } from 'react-router-dom';
 You can add more*/}
 export const Home = () => {
 
-    
-
-    const links = [
+const links = [
         {link:"https://adminconsole.adobe.com/enterprise",name:'Adobe Admin'},
     ,{link:'https://staplesanz.my.salesforce.com/home/home.jsp',name:'SalesForce'}
     ,{link:'https://status.salesforce.com/generalmessages/',name:'SalesForce Trust Status'},   
@@ -72,6 +70,35 @@ const openLink = async (app,link,name) => {
             </div>
            
            
+        </div>
+    )
+}
+
+
+const ComputerInfo = () => {
+
+    const [compInfo,setInfo] = useState([])
+
+    const getInfo = async () => {
+
+        const data  = await Axios.get(`${urlHeader}/compInfo`,{
+        })
+
+        console.log(data)
+        
+    
+    }
+
+    useEffect(() => {
+        getInfo()
+        return () => {
+            
+        }
+    }, [])
+
+    return (
+        <div>
+       
         </div>
     )
 }
