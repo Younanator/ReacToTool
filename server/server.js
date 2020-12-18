@@ -10,8 +10,8 @@ const notifier = require('node-notifier');
 let listening = false
 app.set('trust proxy', true)
 app.use(cors({origin: '*',credentials:true,allowedHeaders:['Origin']}));
-app.use(blockReqs.blockReqs)
-const appID = 'WincTool'
+//app.use(blockReqs.blockReqs)
+const appID = 'ReactToTool'
 
 
 const PowershellController = require('./Controllers/PowershellController')(app)

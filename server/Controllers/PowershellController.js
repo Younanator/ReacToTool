@@ -1,7 +1,8 @@
-const { exec } = require('child_process');
 const ip = require('ip');
 const Shell = require('node-powershell');
-
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+const PowerShell = require("powershell");
 
 
 module.exports = (app) => {
@@ -71,10 +72,10 @@ Invoke-WmiMethod -Class win32_process -ComputerName $server -Name create -Argume
           `);
           
           ps.invoke().then(output => {
-              
+            ps.dispose()
             const data = output.split('\n')
            
-           ps.dispose()
+           
            
          
            
@@ -245,10 +246,10 @@ const getSecurityGroups = async () => {
           `);
           
           ps.invoke().then(output => {
-              
+            ps.dispose()
             const data = output.split('\n')
            
-           ps.dispose()
+           
            
          
            
@@ -271,38 +272,45 @@ const getSecurityGroups = async () => {
 
 
 
-const compInfo = async () => {
-   app.get("/api/compInfo",  function(req, res) {
-     const ps = new Shell({
-        verbose:true,
-          executionPolicy: 'Bypass',
-          noProfile: true,
-        });
+const compInfo =  () => {
+   app.get("/api/compInfo", async function(req, res) {
 
+      try {
+
+         let ps = new PowerShell("Get-ComputerInfo");
+
+// Handle process errors (e.g. powershell not found)
+ps.on("error", err => {
+    console.error(err);
+});
+
+// Stdout
+ps.on("output", data => {
+    console.log(data);
+});
+
+// Stderr
+ps.on("error-output", data => {
+    console.error(data);
+});
+
+// End
+ps.on("end", code => {
+    // Do Something on end
+    console.log(code)
+});
+          
+          //const data = stdout.split('\n')
          
-          
-          ps.addCommand(`
-              
-          Get-ComputerInfo
-
-
-          `);
-          
-          ps.invoke().then(output => {
-              
-         const data = output.split('\n')
-           console.log(data)
-           
-      
-           res.status(200).send(data)
-           ps.dispose()
-        }).catch(error => {
-           ps.dispose()
+          res.status(200).send('ok')
+      } catch (error) {
+         
            console.log(error)
            res.status(422).send(error)
-        }); 
+      }
+     
 
-          
+   
      }); 
    }
 

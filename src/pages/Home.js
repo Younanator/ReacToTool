@@ -44,7 +44,7 @@ const openLink = async (app,link,name) => {
     return (
         <div className="rowFlex">
             <ToggleMenu></ToggleMenu>
-            
+            <ComputerInfo></ComputerInfo>
             
             <div style={{margin:'auto',display:'flex',width:'150px',marginTop:'10px',marginLeft:'100px'}}>
             <div className="wincLinks">
@@ -80,11 +80,15 @@ const ComputerInfo = () => {
     const [compInfo,setInfo] = useState([])
 
     const getInfo = async () => {
+  try {
+    const data  = await Axios.get(`${urlHeader}/compInfo`,{
+    })
 
-        const data  = await Axios.get(`${urlHeader}/compInfo`,{
-        })
-
-        console.log(data)
+    console.log(data.data)
+  } catch (error) {
+      console.log('error')
+  }
+        
         
     
     }
@@ -98,7 +102,7 @@ const ComputerInfo = () => {
 
     return (
         <div>
-       
+      
         </div>
     )
 }
