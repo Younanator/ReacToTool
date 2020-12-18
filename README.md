@@ -24,7 +24,7 @@ This project was created using Electron, React, Powershell and NodeJS.
 1. You will need to move the server folder to the public folder - Copy paste it
 2. In electron.js in the public folder, add the following
 ```
-const reqServer = require('./server/server.js)
+const reqServer = require('./server/server.js')
 ```
 3. Execute - yarn prepack
 4. Execute - yarn epack 
