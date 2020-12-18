@@ -1,4 +1,6 @@
 This project was created using Electron, React, Powershell and NodeJS.
+## Preview
+![](./images/HomeExpand.png)
 
 ## SETUP
 
