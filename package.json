@@ -38,7 +38,7 @@
     "http-proxy-middleware": "^0.20.0",
     "ip": "^1.1.5",
     "node-cmd": "^3.0.0",
-    "node-powershell": "^4.0.0",
+    "node-powershell": "^3.3.1",
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.6",
     "powershell": "^2.3.2",

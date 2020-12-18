@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import {urlHeader} from '../config/config'
 import { ToggleMenu } from '../components/ToggleMenu';
 import {  Link,withRouter } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 {/** You will need to configure this for your own links 
 You can add more*/}
@@ -44,9 +45,10 @@ const openLink = async (app,link,name) => {
     return (
         <div className="rowFlex">
             <ToggleMenu></ToggleMenu>
-            <ComputerInfo></ComputerInfo>
-            
-            <div style={{margin:'auto',display:'flex',width:'150px',marginTop:'10px',marginLeft:'100px'}}>
+           
+           
+           
+            <div style={{margin:'auto',display:'flex',flexDirection:'column'}}>
             <div className="wincLinks">
             <Link to="/Scanner" style={{outline:'none',color:'white',textDecoration:'none'}} className="normalLinks" >Scanner</Link>
             {links.map(e => {
@@ -67,7 +69,10 @@ const openLink = async (app,link,name) => {
                 )
             })}
             </div>
+            
+            <ComputerInfo></ComputerInfo>
             </div>
+           
            
            
         </div>
@@ -78,19 +83,19 @@ const openLink = async (app,link,name) => {
 const ComputerInfo = () => {
 
     const [compInfo,setInfo] = useState([])
-
+    const [fetchAPI,setFetch] = useState(true)
     const getInfo = async () => {
+        
   try {
     const data  = await Axios.get(`${urlHeader}/compInfo`,{
     })
 
-    console.log(data.data)
+    setInfo(data.data)
   } catch (error) {
       console.log('error')
   }
+  setFetch(false)
         
-        
-    
     }
 
     useEffect(() => {
@@ -102,7 +107,26 @@ const ComputerInfo = () => {
 
     return (
         <div>
-      
+      { !fetchAPI ? 
+      <table style={{width:'20%'}}>
+      <tr>
+        <th style={{fontSize:'0.7rem'}}>Component</th>
+        <th style={{fontSize:'0.7rem'}}>Value</th>
+        
+      </tr>
+    {compInfo.map(e => {
+        const item = e.split(':')
+          return (
+            <tr>
+            <td style={{fontSize:'0.65rem'}}>{item[0]}</td>
+            <td style={{fontSize:'0.65rem'}}>{item[1]}</td>
+            
+          </tr>
+          )
+      }) }
+  
+      </table>
+      : <Skeleton height={150} width={450}></Skeleton>}
         </div>
     )
 }

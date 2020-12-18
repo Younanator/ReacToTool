@@ -273,41 +273,34 @@ const getSecurityGroups = async () => {
 
 
 const compInfo =  () => {
-   app.get("/api/compInfo", async function(req, res) {
+   app.get("/api/compInfo", function(req, res) {
 
-      try {
-
-         let ps = new PowerShell("Get-ComputerInfo");
-
-// Handle process errors (e.g. powershell not found)
-ps.on("error", err => {
-    console.error(err);
-});
-
-// Stdout
-ps.on("output", data => {
-    console.log(data);
-});
-
-// Stderr
-ps.on("error-output", data => {
-    console.error(data);
-});
-
-// End
-ps.on("end", code => {
-    // Do Something on end
-    console.log(code)
-});
-          
-          //const data = stdout.split('\n')
-         
-          res.status(200).send('ok')
-      } catch (error) {
-         
-           console.log(error)
-           res.status(422).send(error)
-      }
+      const ps = new Shell({
+         verbose:true,
+           executionPolicy: 'Bypass',
+           noProfile: true,
+         });
+ 
+           
+           ps.addCommand(`
+               
+           Get-ComputerInfo
+ 
+ 
+           `);
+           
+           ps.invoke().then(output => {
+             ps.dispose()
+             const data = output.split('\n')
+   
+            res.status(200).send(data)
+         },err => {
+            console.log('Error')
+         }).catch(error => {
+            ps.dispose()
+            console.log(error)
+            res.status(422).send(error)
+         }); 
      
 
    

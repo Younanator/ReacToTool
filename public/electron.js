@@ -37,7 +37,7 @@ function createWindow() {
   })
 
   mainWindow = new BrowserWindow({
-    width: 470,
+    width: 530,
     height: 420,
     /* webPreferences: {
       devTools: false
