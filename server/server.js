@@ -19,7 +19,6 @@ module.exports = (ipcMain) => {
     PowershellController.unlockUser();
     PowershellController.openLink();
     PowershellController.getSecurityGroups();
-    PowershellController.compInfo();
     // IPC Controller
     IPCController.index()
     

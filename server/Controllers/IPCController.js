@@ -8,6 +8,7 @@ const PowerShell = require("powershell");
 module.exports = (ipcMain) => {
 
  const index = () => {
+
     ipcMain.on('compInfo', (event, arg) => {
 
         const ps = new Shell({
@@ -33,9 +34,7 @@ module.exports = (ipcMain) => {
                ps.dispose()
                console.log(error)
                event.reply('compInfo-reply', [])
-            }); 
-
-        
+            });  
     })
       
  }

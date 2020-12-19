@@ -272,48 +272,12 @@ const getSecurityGroups = async () => {
 
 
 
-const compInfo =  () => {
-   app.get("/api/compInfo", function(req, res) {
-
-      const ps = new Shell({
-         verbose:true,
-           executionPolicy: 'Bypass',
-           noProfile: true,
-         });
- 
-           
-           ps.addCommand(`
-               
-           Get-ComputerInfo
- 
- 
-           `);
-           
-           ps.invoke().then(output => {
-             ps.dispose()
-             const data = output.split('\n')
-   
-            res.status(200).send(data)
-         },err => {
-            console.log('Error')
-         }).catch(error => {
-            ps.dispose()
-            console.log(error)
-            res.status(422).send(error)
-         }); 
-     
-
-   
-     }); 
-   }
-
 
 
     return Object.create({
        
         
         unlockUser,
-        compInfo,
         openLink,
         getSecurityGroups,
        
