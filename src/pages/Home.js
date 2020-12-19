@@ -15,7 +15,7 @@ export const Home = () => {
 
 const links = [
         {link:"https://adminconsole.adobe.com/enterprise",name:'Adobe Admin'},
-    ,{link:'https://staplesanz.my.salesforce.com/home/home.jsp',name:'SalesForce'}
+    ,{link:'https://my.salesforce.com/home/home.jsp',name:'SalesForce'}
     ,{link:'https://status.salesforce.com/generalmessages/',name:'SalesForce Trust Status'},   
 ]
 

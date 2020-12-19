@@ -1,7 +1,7 @@
-This project was created using Electron, React, Powershell and NodeJS.
+This project was created using Electron, React, Redux, Powershell and NodeJS.
 ## Features  
 ElectronIPC - Communicate from Electron to React
-Express HTTP API with blocking middleware for non local IPs - Can be changed for production usage
+Express HTTP API with blocking middleware for non local host - Can be changed for production usage
 ## Preview
 ![Home Expand](https://i.ibb.co/MB59CDT/Capture.png)
 
@@ -29,10 +29,14 @@ Express HTTP API with blocking middleware for non local IPs - Can be changed for
 ```
 const reqServer = require('./server/server.js')
 ```
-3. Execute - yarn prepack
-4. Execute - yarn epack 
+3. Obfuscate/defend all contents of the server file and electron.js. App.asar can be unpackaged and easily altered with. This part ensures that its near impossible for someone
+to tamper with your code even when unpackaged. 
+You may also implement Code Signing - please see Electron Docs on how to do so. This ensures that your APP is genuine and provides additional security layer for REST APIs.
+4. Execute - yarn prepack 
+   Execute - yarn edev - to make sure everything is working
+   Execute - yarn epack 
 5. Go to directory where it has placed the installer (dist folder) and run the installer or copy it wherever you need
-6. You will need to place the content of the prodresources folder and place the 0000049 folder in the same directory to utilize RDP, SCCM remote connect, etc. 
+6. You will need to place the content of the prodresources folder and place the 0000049 folder in the same directory of the installed files to utilize RDP, SCCM remote connect, etc. 
 7. Done
 
 You may use this tool, make edits and reconfigure the whole thing if you like.
