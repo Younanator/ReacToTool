@@ -5,6 +5,10 @@ const Menu = electron.Menu
 const Tray = electron.Tray
 const path = require('path');
 const isDev = require('electron-is-dev');
+const {ipcMain} = electron
+
+const server = require('../server/server')(ipcMain)
+server.start()
 
 let mainWindow;
 let isQuiting;
@@ -39,9 +43,11 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 530,
     height: 420,
-    /* webPreferences: {
-      devTools: false
-      } */
+     webPreferences: {
+      
+        nodeIntegration: true
+      
+      } 
   })
   
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);

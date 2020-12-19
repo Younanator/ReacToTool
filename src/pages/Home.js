@@ -6,9 +6,11 @@ import {urlHeader} from '../config/config'
 import { ToggleMenu } from '../components/ToggleMenu';
 import {  Link,withRouter } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
-
+const electron = window.require('electron');
+const { ipcRenderer} = electron
 {/** You will need to configure this for your own links 
 You can add more*/}
+
 export const Home = () => {
 
 const links = [
@@ -84,29 +86,25 @@ const ComputerInfo = () => {
 
     const [compInfo,setInfo] = useState([])
     const [fetchAPI,setFetch] = useState(true)
-    const getInfo = async () => {
-        
-  try {
-    const data  = await Axios.get(`${urlHeader}/compInfo`,{
-    })
 
-    setInfo(data.data)
-  } catch (error) {
-      console.log('error')
-  }
-  setFetch(false)
-        
+
+    const getInfo =  async () => {
+        ipcRenderer.send('compInfo', 'ping')
     }
+
+    ipcRenderer.on('compInfo-reply', (event, arg) => {
+        setInfo(arg)
+        setFetch(false)
+    })
 
     useEffect(() => {
         getInfo()
-        return () => {
-            
-        }
+        
     }, [])
 
     return (
         <div>
+            
       { !fetchAPI ? 
       <table style={{width:'20%'}}>
       <tr>
