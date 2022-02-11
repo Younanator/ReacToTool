@@ -39,7 +39,7 @@
     "ip": "^1.1.5",
     "node-cmd": "^3.0.0",
     "node-powershell": "^3.3.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nodemon": "^2.0.6",
     "powershell": "^2.3.2",
     "react": "^16.12.0",
